@@ -1,0 +1,11 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.chart {
+  width: 100%;
+  height: 300px;
+
+  @include mixins.mobile {
+    height: 200px;
+  }
+}

@@ -1,0 +1,83 @@
+@use "config" as config;
+@use "mixins" as mixins;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: config.$font;
+  line-height: 30px;
+  font-weight: 100;
+}
+
+body {
+  background: config.$background;
+  user-select: none;
+  margin: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 2.2rem;
+  @include mixins.mobile {
+    font-size: 2rem;
+  }
+}
+
+h2 {
+  font-size: 1.7rem;
+  @include mixins.mobile {
+    font-size: 1.5rem;
+  }
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.main {
+  min-height: 100vh;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.alert {
+  text-align: center;
+  color: config.$red;
+  margin: 16px 0px;
+}
+
+// input file
+label.file input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+.file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid config.$lightgrey;
+  padding: 8px;
+  color: config.$grey;
+  height: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.file:hover {
+  color: config.$black;
+  border: 1px solid config.$brand;
+}

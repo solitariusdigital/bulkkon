@@ -1,0 +1,31 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.footer {
+  margin: auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.navigation {
+  @include mixins.row-space-between-center();
+  width: 180px;
+  direction: rtl;
+
+  .nav {
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$brand;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .navActive {
+    color: config.$brand;
+    font-weight: bold;
+  }
+}

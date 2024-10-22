@@ -1,0 +1,106 @@
+@use "config" as config;
+
+$screen-mobile: 700px;
+$screen-tablet: 1400px;
+$screen-large: 2000px;
+$screen-fourK: 6000px;
+
+@mixin mobile {
+  @media (max-width: #{$screen-mobile}) {
+    @content;
+  }
+}
+@mixin tablet {
+  // Landscape orientation
+  @media (min-width: #{$screen-mobile}) and (max-width: #{$screen-tablet}) and (orientation: landscape) {
+    @content;
+  }
+}
+@mixin tabletPortrait {
+  // Portrait orientation
+  @media (min-width: #{$screen-mobile}) and (max-width: #{$screen-tablet}) and (orientation: portrait) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: #{$screen-tablet} ) and (max-width: #{$screen-large}) {
+    @content;
+  }
+}
+@mixin fourK {
+  @media (min-width: #{$screen-large} ) and (max-width: #{$screen-fourK}) {
+    @content;
+  }
+}
+@mixin allDesktop {
+  @media (min-width: #{$screen-tablet} ) {
+    @content;
+  }
+}
+
+@mixin button($color, $subColor) {
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  background: $color;
+  color: $subColor;
+  border: none;
+
+  @include allDesktop() {
+    &:hover {
+      cursor: pointer;
+      color: $subColor;
+      border: 1px solid $color;
+      background: config.$background;
+    }
+  }
+}
+
+@mixin input() {
+  padding: 12px;
+  height: 50px;
+  color: config.$black;
+  outline: none;
+  border: 1px solid config.$lightgrey;
+  font-weight: 300;
+  border-radius: 4px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid config.$brand;
+  }
+}
+
+@mixin textarea() {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  padding: 12px;
+  outline: none;
+  border-radius: 12px;
+  font-weight: 300;
+  background: config.$background;
+  color: config.$black;
+  border: 1px solid config.$white;
+
+  &:focus {
+    outline: none;
+    background: transparent;
+    border: 1px solid config.$black;
+  }
+}
+
+@mixin border-radius() {
+  border-radius: 8px;
+}
+
+@mixin transparentBackground($alpha, $color) {
+  background-color: rgba(red($color), green($color), blue($color), $alpha);
+}
+
+@mixin row-space-between-center() {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}

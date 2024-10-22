@@ -1,0 +1,13 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.notFound {
+  margin: auto;
+  width: config.$content-width;
+  margin-top: 150px;
+  text-align: center;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}

@@ -49,7 +49,7 @@ const Chart = ({ chartId, legend }) => {
     return () => {
       chart.destroy(); // Cleanup on unmount
     };
-  }, []);
+  }, [chartId, legend, screenSize]);
 
   return <div id={chartId} className={classes.chart}></div>;
 };

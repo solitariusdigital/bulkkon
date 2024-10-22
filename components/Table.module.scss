@@ -1,0 +1,58 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: config.$max-widthHeigh;
+  width: config.$content-width;
+  padding: 12px;
+  margin: 0px auto;
+  box-shadow: config.$card-shadow;
+  background: config.$white;
+  border: 1px solid config.$white;
+  @include mixins.border-radius();
+
+  .header,
+  .information {
+    height: 40px;
+    @include mixins.row-space-between-center();
+
+    td,
+    th {
+      width: 100px;
+      text-align: center;
+    }
+
+    th {
+      color: config.$grey;
+    }
+
+    .icon {
+      width: 30px !important;
+      height: 30px;
+    }
+  }
+
+  .information {
+    margin: 4px 0px;
+
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        background: config.$background;
+        color: config.$brand;
+      }
+    }
+  }
+
+  .logo {
+    position: relative;
+
+    .image {
+      width: 80px;
+      height: 30px;
+    }
+  }
+}
