@@ -8,10 +8,9 @@
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
   padding: 12px;
-  margin: 0px auto;
+  margin: auto;
   box-shadow: config.$card-shadow;
   background: config.$white;
-  border: 1px solid config.$white;
   @include mixins.border-radius();
 
   .header,

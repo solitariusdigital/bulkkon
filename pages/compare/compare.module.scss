@@ -1,2 +1,47 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  max-width: config.$max-widthHeigh;
+  width: config.$content-width;
+  .button {
+    margin: 20px 0px;
+    @include mixins.button(config.$brand, config.$brand, config.$white);
+  }
+
+  .inputContainer {
+    width: 350px;
+    margin: 20px 0px;
+    @include mixins.row-space-between-center();
+
+    select {
+      @include mixins.input();
+      width: 150px;
+    }
+  }
+
+  .text {
+    margin-bottom: 20px;
+    @include mixins.row-space-between-center();
+
+    .name {
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0px 4px;
+    }
+  }
+
+  .chart {
+    padding: 12px;
+    box-shadow: config.$card-shadow;
+    background: config.$white;
+    width: 100%;
+    @include mixins.border-radius();
+  }
+}

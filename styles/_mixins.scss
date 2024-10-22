@@ -38,20 +38,20 @@ $screen-fourK: 6000px;
   }
 }
 
-@mixin button($color, $subColor) {
-  width: 150px;
+@mixin button($color1, $color2, $subColor) {
+  width: 190px;
   height: 40px;
   border-radius: 4px;
-  background: $color;
+  border: 1px solid $color1;
   color: $subColor;
-  border: none;
+  box-shadow: config.$button-shadow;
+  background: $color2;
 
-  @include allDesktop() {
+  @include desktop {
     &:hover {
       cursor: pointer;
-      color: $subColor;
-      border: 1px solid $color;
-      background: config.$background;
+      background: $subColor;
+      color: $color2;
     }
   }
 }

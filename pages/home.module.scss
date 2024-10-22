@@ -1,6 +1,23 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+
+  .button {
+    @include mixins.button(config.$brand, config.$brand, config.$white);
+  }
+
+  .table {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+
 .notFound {
   margin: auto;
   width: config.$content-width;

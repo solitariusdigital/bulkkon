@@ -9,7 +9,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import dynamic from "next/dynamic";
 import { fourGenerator } from "@/services/utility";
 
-const Chart = dynamic(() => import("./Chart"), { ssr: false });
+const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
 
 export default function Table() {
   const { screenSize, setScreenSize } = useContext(StateContext);

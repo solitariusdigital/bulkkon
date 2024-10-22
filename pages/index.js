@@ -9,8 +9,16 @@ export default function Home() {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
   return (
-    <Fragment>
-      <Table />
-    </Fragment>
+    <div className={classes.container}>
+      <button
+        className={classes.button}
+        onClick={() => Router.push("/compare")}
+      >
+        مقایسه قیمت
+      </button>
+      <div className={classes.table}>
+        <Table />
+      </div>
+    </div>
   );
 }
