@@ -94,7 +94,6 @@ export default function Table() {
                     objectFit="contain"
                     alt="logo"
                     as="image"
-                    priority
                   />
                 </div>
               </td>
