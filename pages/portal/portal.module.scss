@@ -1,2 +1,57 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+}
+
+.form {
+  width: 40%;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
+  .input {
+    margin: 10px auto;
+
+    .bar {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .label {
+      color: config.$grey;
+      margin-bottom: 8px;
+    }
+
+    input {
+      @include mixins.input();
+      width: 100%;
+    }
+  }
+
+  .formAction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      @include mixins.button(config.$brand, config.$brand, config.$white);
+    }
+  }
+
+  .alert {
+    height: 25px;
+    margin: 16px 0px;
+    color: config.$red;
+  }
+}
