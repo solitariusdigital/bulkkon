@@ -3,8 +3,11 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
+import secureLocalStorage from "react-secure-storage";
+import Router from "next/router";
 
 export default function Company() {
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const [name, setName] = useState("");
   const [manager, setManager] = useState("");
   const [contact, setContact] = useState("");
@@ -28,6 +31,12 @@ export default function Company() {
     setTimeout(() => {
       setAlert("");
     }, 3000);
+  };
+
+  const logOut = () => {
+    window.location.assign("/");
+    secureLocalStorage.removeItem("currentUser");
+    setCurrentUser(null);
   };
 
   return (
@@ -177,6 +186,9 @@ export default function Company() {
         <button disabled={disableButton} onClick={() => handleSubmit()}>
           ذخیره داده
         </button>
+        <div className={classes.logout} onClick={() => logOut()}>
+          <p>خروج از پورتال</p>
+        </div>
       </div>
     </div>
   );

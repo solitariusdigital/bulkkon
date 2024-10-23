@@ -2,6 +2,9 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
@@ -14,7 +17,7 @@
 
 .navigation {
   width: 350px;
-  margin: auto;
+  margin-top: 20px;
   margin-bottom: 50px;
   border-radius: 4px;
   height: 40px;

@@ -11,7 +11,6 @@ import { validateEmail } from "@/services/utility";
 
 export default function Portal() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const { navigationBar, setNavigationBar } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,14 +22,6 @@ export default function Portal() {
       Router.push("/admin");
     }
   }, [permissionControl]);
-
-  useEffect(() => {
-    navigationBar.map((nav, i) => {
-      nav.active = false;
-    });
-    setNavigationBar([...navigationBar]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const showAlert = (message) => {
     setAlert(message);
@@ -122,7 +113,7 @@ export default function Portal() {
 
   return (
     <div className={classes.container}>
-      <h1>پورتال</h1>
+      <h2>پورتال</h2>
       <div className={classes.form}>
         <div className={classes.input}>
           <div className={classes.bar}>

@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.svg";
 import secureLocalStorage from "react-secure-storage";
-import { getSingleUserApi, getControlsApi } from "@/services/api";
+import { getSingleUserApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
@@ -55,13 +55,11 @@ export default function RootLayout({ children }) {
             setPermissionControl("user");
           }
         }
-        const colorObject = await getControlsApi();
-        setMenuColor(colorObject[0].menu);
       } catch (error) {
         console.error(error);
       }
     };
-    // fetchData();
+    fetchData();
     setTimeout(() => {
       setAppLoader(true);
     }, 1000);

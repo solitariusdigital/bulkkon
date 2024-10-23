@@ -4,6 +4,7 @@
 .form {
   width: 500px;
   margin: auto;
+  font-weight: 100;
 
   .input {
     margin: 12px 0px;
@@ -94,4 +95,21 @@
 
 .priceInfo {
   @include mixins.row-space-between-center();
+}
+
+.logout {
+  margin-top: 50px;
+  cursor: pointer;
+
+  p {
+    font-size: small;
+    color: config.$grey;
+
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$brand;
+      }
+    }
+  }
 }
