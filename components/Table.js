@@ -56,7 +56,7 @@ export default function Table() {
     // Calculate the percentage change
     const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2); // Fixed to 2 decimal places
     // Determine if it went up or down
-    const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? " " : " ";
+    const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : null;
     return {
       percentageChange: percentageChange + "%",
       changeAmount: changeAmount,

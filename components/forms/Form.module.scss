@@ -1,0 +1,87 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.form {
+  width: 500px;
+  margin: auto;
+
+  .input {
+    margin: 12px 0px;
+  }
+
+  .bar {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+  }
+
+  .label {
+    color: config.$grey;
+
+    span {
+      color: config.$red;
+    }
+  }
+
+  select,
+  textarea,
+  input {
+    @include mixins.input();
+    width: 100%;
+  }
+
+  textarea {
+    height: 200px;
+    max-height: 200px;
+    min-height: 200px;
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.formAction {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+
+  .mediaContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    gap: 12px;
+    width: 100%;
+
+    .media {
+      width: 100%;
+    }
+  }
+
+  button {
+    @include mixins.button(config.$brand, config.$brand, config.$white);
+    margin: auto;
+  }
+
+  .clearMedia {
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .preview {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  }
+
+  .alert {
+    margin: 16px 0px;
+    color: config.$red;
+  }
+}
