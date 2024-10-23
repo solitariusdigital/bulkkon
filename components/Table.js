@@ -86,8 +86,8 @@ export default function Table() {
                 setExpandedItem(expandedItem === index ? null : index)
               }
             >
-              <td className={classes.logo}>
-                <div className={classes.image}>
+              <td>
+                <div className={classes.logo}>
                   <Image
                     src={company.logo}
                     layout="fill"
@@ -125,11 +125,13 @@ export default function Table() {
                 )}
               </td>
             </tr>
-            {expandedItem === index && (
-              <td colSpan={screenSize !== "mobile" ? 5 : 4}>
-                <Chart chartId={`chart-${fourGenerator()}`} legend={false} />
-              </td>
-            )}
+            <tr>
+              {expandedItem === index && (
+                <td colSpan={screenSize !== "mobile" ? 5 : 4}>
+                  <Chart chartId={`chart-${fourGenerator()}`} legend={false} />
+                </td>
+              )}
+            </tr>
           </Fragment>
         ))}
       </tbody>
