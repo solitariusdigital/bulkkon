@@ -2,6 +2,7 @@ import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./admin.module.scss";
 import Company from "@/components/forms/Company";
+import Price from "@/components/forms/Price";
 
 export default function Admin() {
   const [formType, setFormType] = useState("شرکت" || "قیمت");
@@ -22,7 +23,7 @@ export default function Admin() {
         ))}
       </div>
       {formType === "شرکت" && <Company />}
-      {formType === "قیمت" && <Company />}
+      {formType === "قیمت" && <Price />}
     </div>
   );
 }

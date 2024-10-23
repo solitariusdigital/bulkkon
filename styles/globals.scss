@@ -91,3 +91,14 @@ label.file input[type="file"] {
   color: config.$brand;
   border: 1px solid config.$brand;
 }
+
+.Calendar__day.-selected,
+.Calendar__day.-selectedStart,
+.Calendar__day.-selectedEnd {
+  background: config.$brand !important;
+}
+
+.Calendar__monthSelectorItem.-active .Calendar__monthSelectorItemText,
+.Calendar__yearSelectorItem.-active .Calendar__yearSelectorText {
+  background: config.$brand !important;
+}

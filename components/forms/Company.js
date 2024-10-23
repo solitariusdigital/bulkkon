@@ -15,6 +15,10 @@ export default function Company() {
   const [alert, setAlert] = useState("");
 
   const handleSubmit = () => {
+    if (!name || !manager || !contact || !address || !description || !media) {
+      showAlert("همه موارد الزامیست");
+      return;
+    }
     showAlert("ذخیره شد");
     setDisableButton(true);
   };
@@ -30,7 +34,10 @@ export default function Company() {
     <div className={classes.form}>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>شرکت</p>
+          <p className={classes.label}>
+            <span>*</span>
+            شرکت
+          </p>
           <CloseIcon
             className="icon"
             onClick={() => setName("")}

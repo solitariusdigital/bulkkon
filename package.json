@@ -1,5 +1,5 @@
 {
-  "name": "eshareh",
+  "name": "kimpur",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,29 +12,24 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
-    "@mui/styled-engine-sc": "^5.14.10",
     "aws-sdk": "^2.1691.0",
     "c3": "^0.7.20",
     "crypto-js": "^4.2.0",
     "d3": "^7.9.0",
-    "get-node-cli": "^8.1.0",
     "moment": "^2.30.1",
     "mongodb-shell": "^1.0.1",
     "mongoose": "^8.7.0",
     "next": "^14.2.13",
     "next-pwa": "^5.6.0",
     "next-seo": "^5.15.0",
-    "query-string": "^8.2.0",
     "react": "18.3.1",
-    "react-color": "^2.19.3",
     "react-dom": "18.3.1",
     "react-secure-storage": "^1.3.2",
     "sass": "^1.79.4",
     "sharp": "^0.33.5",
-    "styled-components": "^5.3.5",
-    "swiper": "^11.1.14",
     "webpack": "^5.95.0"
   },
   "devDependencies": {

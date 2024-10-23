@@ -16,9 +16,10 @@
   width: 350px;
   margin: auto;
   margin-bottom: 50px;
-  border-radius: 50px;
+  border-radius: 4px;
   height: 40px;
   border: 1px solid config.$lightgrey;
+  background: config.$white;
   text-transform: capitalize;
   @include mixins.row-space-between-center();
   justify-content: space-around;

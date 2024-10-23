@@ -85,3 +85,13 @@
     color: config.$red;
   }
 }
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0px;
+}
+
+.priceInfo {
+  @include mixins.row-space-between-center();
+}
