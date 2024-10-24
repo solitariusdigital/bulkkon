@@ -4,8 +4,11 @@ import classes from "./Chart.module.scss";
 import c3 from "c3";
 import "c3/c3.css";
 
-const Chart = ({ chartId, legend }) => {
+const Chart = ({ chartId, legend, priceData, companyData }) => {
   const { screenSize, setScreenSize } = useContext(StateContext);
+
+  console.log(priceData);
+  console.log(companyData);
 
   useEffect(() => {
     const chart = c3.generate({
@@ -22,7 +25,7 @@ const Chart = ({ chartId, legend }) => {
             "1403-07-05",
             "1403-07-06",
           ],
-          ["data1", 320, 321, 325, 320, 323, 323],
+          [companyData.name, 320, 321, 325, 320, 323, 323],
           ["data2", 319, 321, 320, 323, 325, 321],
         ],
       },
@@ -49,7 +52,8 @@ const Chart = ({ chartId, legend }) => {
     return () => {
       chart.destroy(); // Cleanup on unmount
     };
-  }, [chartId, legend, screenSize]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <div id={chartId} className={classes.chart}></div>;
 };

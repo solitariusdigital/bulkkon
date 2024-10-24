@@ -1,46 +1,22 @@
 import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Table.module.scss";
-import logo from "@/assets/logo.svg";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import dynamic from "next/dynamic";
-import { fourGenerator } from "@/services/utility";
+import {
+  fourGenerator,
+  convertFaToEn,
+  convertNumber,
+} from "@/services/utility";
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
 
 export default function Table({ companyData }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [expandedItem, setExpandedItem] = useState(null);
-
-  const companies = [
-    {
-      name: "شرکت",
-      today: 340000,
-      yesterday: 338000,
-      logo: logo,
-    },
-    {
-      name: "شرکت",
-      today: 338000,
-      yesterday: 340000,
-      logo: logo,
-    },
-    {
-      name: "شرکت",
-      today: 345000,
-      yesterday: 338000,
-      logo: logo,
-    },
-    {
-      name: "شرکت",
-      today: 340000,
-      yesterday: 340000,
-      logo: logo,
-    },
-  ];
 
   const expandInformation = (index) => {
     setExpandedItem(index);
@@ -49,16 +25,59 @@ export default function Table({ companyData }) {
     }
   };
 
-  const calculateChange = (data) => {
-    const { today, yesterday } = data;
+  const calculateChange = (priceObject) => {
+    let today = findPriceDates(priceObject, false);
+    let yesterday = findPriceDates(priceObject, true);
     const changeAmount = today - yesterday;
     const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2); // Fixed to 2 decimal places
     const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : null;
-    return {
-      percentageChange: percentageChange + "%",
-      changeAmount: changeAmount,
-      direction: direction,
-    };
+    if (today !== "-" && yesterday !== "-") {
+      return {
+        percentageChange: percentageChange + "%",
+        changeAmount: changeAmount,
+        direction: direction,
+      };
+    } else {
+      return {
+        percentageChange: "-",
+      };
+    }
+  };
+
+  const findPriceDates = (price, isYesterday) => {
+    let todayDate = getCurrentDate(isYesterday);
+    let value;
+    for (const key in price) {
+      if (key === convertFaToEn(todayDate)) {
+        value = price[key];
+      }
+    }
+    return value ? value : "-";
+  };
+
+  const getCurrentDate = (isYesterday = false) => {
+    const now = new Date();
+    if (isYesterday) {
+      now.setDate(now.getDate() - 1);
+    }
+    const date = now.toLocaleDateString("fa-IR", {
+      timeZone: "Asia/Tehran",
+    });
+    return date;
+  };
+
+  const sortPricesByDate = (prices) => {
+    const sortedKeys = Object.keys(prices).sort((a, b) => {
+      return (
+        new Date(a.replace(/-/g, "/")).getTime() -
+        new Date(b.replace(/-/g, "/")).getTime()
+      );
+    });
+    const sortedPrices = {};
+    sortedKeys.forEach((key) => {
+      sortedPrices[key] = prices[key];
+    });
+    return sortedPrices;
   };
 
   return (
@@ -75,7 +94,7 @@ export default function Table({ companyData }) {
         </tr>
       </thead>
       <tbody>
-        {companies.map((company, index) => (
+        {companyData.map((company, index) => (
           <Fragment key={index}>
             <tr
               className={classes.information}
@@ -86,7 +105,7 @@ export default function Table({ companyData }) {
               <td>
                 <div className={classes.logo}>
                   <Image
-                    src={company.logo}
+                    src={company.media}
                     layout="fill"
                     objectFit="contain"
                     alt="logo"
@@ -94,19 +113,21 @@ export default function Table({ companyData }) {
                   />
                 </div>
               </td>
-              <td>{company.today}</td>
-              {screenSize !== "mobile" && <td>{company.yesterday}</td>}
+              <td>{convertNumber(findPriceDates(company.price, false))}</td>
+              {screenSize !== "mobile" && (
+                <td>{convertNumber(findPriceDates(company.price, true))}</td>
+              )}
               <td
                 style={{
                   color:
-                    calculateChange(company).direction === "+"
+                    calculateChange(company.price).direction === "+"
                       ? "#4eba5c"
                       : "#e43137",
                   fontWeight: "500",
                 }}
               >
-                {calculateChange(company).direction}
-                {calculateChange(company).percentageChange}
+                {calculateChange(company.price).direction}
+                {calculateChange(company.price).percentageChange}
               </td>
               <td className={classes.icon}>
                 {expandedItem === index ? (
@@ -125,7 +146,12 @@ export default function Table({ companyData }) {
             <tr>
               {expandedItem === index && (
                 <td colSpan={screenSize !== "mobile" ? 5 : 4}>
-                  <Chart chartId={`chart-${fourGenerator()}`} legend={false} />
+                  <Chart
+                    chartId={`chart-${fourGenerator()}`}
+                    priceData={sortPricesByDate(company.price)}
+                    companyData={company}
+                    legend={false}
+                  />
                 </td>
               )}
             </tr>
