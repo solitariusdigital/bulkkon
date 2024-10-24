@@ -2,12 +2,23 @@ import { useContext, Fragment, useState } from "react";
 import classes from "./CompanyList.module.scss";
 import Image from "next/legacy/image";
 
-export default function CompanyList({ company }) {
+export default function CompanyList({ companyData }) {
   return (
     <div className={classes.container}>
-      {company.map((comp, index) => (
+      {companyData.map((comp, index) => (
         <div key={index} className={classes.card}>
-          <h3>{comp.name}</h3>
+          <div className={classes.row}>
+            <div className={classes.logo}>
+              <Image
+                src={comp.media}
+                layout="fill"
+                objectFit="contain"
+                alt="logo"
+                as="image"
+              />
+            </div>
+            <h3>{comp.name}</h3>
+          </div>
           <div className={classes.row}>
             <p
               className={classes.phone}
@@ -19,8 +30,8 @@ export default function CompanyList({ company }) {
             </p>
             <h4>{comp.manager}</h4>
           </div>
-          <p>{comp.address}</p>
           <p>{comp.description}</p>
+          <p className={classes.address}>{comp.address}</p>
         </div>
       ))}
     </div>

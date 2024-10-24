@@ -11,7 +11,7 @@ import { fourGenerator } from "@/services/utility";
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
 
-export default function Table() {
+export default function Table({ companyData }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [expandedItem, setExpandedItem] = useState(null);
 
@@ -51,11 +51,8 @@ export default function Table() {
 
   const calculateChange = (data) => {
     const { today, yesterday } = data;
-    // Calculate the change amount
     const changeAmount = today - yesterday;
-    // Calculate the percentage change
     const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2); // Fixed to 2 decimal places
-    // Determine if it went up or down
     const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : null;
     return {
       percentageChange: percentageChange + "%",

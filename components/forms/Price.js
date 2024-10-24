@@ -5,30 +5,53 @@ import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import { updateCompanyApi, getSingleCompanyApi } from "@/services/api";
+import { convertNumber } from "@/services/utility";
 
-export default function Price() {
+export default function Price({ companyData }) {
   const [day, setDay] = useState(null);
   const [company, setCompany] = useState("");
+  const [selectedCompany, setSelectedCompany] = useState({});
   const [price, setPrice] = useState(0);
   const [date, setDate] = useState("");
-  const [alert, setAlert] = useState("");
+  const [companies, setCompanies] = useState(
+    companyData.map((company) => company.name)
+  );
   const [disableButton, setDisableButton] = useState(false);
+  const [alert, setAlert] = useState("");
 
-  const companies = ["شرکت قوام", "شرکت اوین", "شرکت خردمند"];
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!company || !price || !date) {
       showAlert("همه موارد الزامیست");
       return;
     }
-    showAlert("ذخیره شد");
+
     setDisableButton(true);
+
+    let getCompanyData = await getSingleCompanyApi(selectedCompany["_id"]);
+    const companyObject = {
+      ...getCompanyData,
+      price: {
+        ...getCompanyData.price,
+        [date]: Number(price),
+      },
+    };
+
+    await updateCompanyApi(companyObject);
+    showAlert("ذخیره شد");
   };
 
   const assingDay = (day) => {
     setDay(day);
     const dateString = `${day.year}-${day.month}-${day.day}`;
     setDate(dateString);
+    setDisableButton(false);
+  };
+
+  const selectCompany = (index) => {
+    setCompany(companyData[index].name);
+    setSelectedCompany(companyData[index]);
+    setDisableButton(false);
   };
 
   const showAlert = (message) => {
@@ -44,7 +67,7 @@ export default function Price() {
         <select
           defaultValue={"default"}
           onChange={(e) => {
-            setCompany(e.target.value);
+            selectCompany(e.target.value);
           }}
         >
           <option value="default" disabled>
@@ -52,7 +75,7 @@ export default function Price() {
           </option>
           {companies.map((company, index) => {
             return (
-              <option key={index} value={company}>
+              <option key={index} value={index}>
                 {company}
               </option>
             );
@@ -94,7 +117,7 @@ export default function Price() {
           </div>
           <div className={classes.priceInfo}>
             <p>{company}</p>
-            <p>{price}</p>
+            <p>{convertNumber(Number(price))}</p>
             <p>{date}</p>
           </div>
           <div className={classes.formAction}>

@@ -33,6 +33,12 @@
     margin: 8px 0px;
     @include mixins.row-space-between-center();
 
+    .logo {
+      position: relative;
+      width: 20%;
+      height: 70px;
+    }
+
     .phone {
       @include mixins.allDesktop {
         &:hover {
@@ -41,5 +47,10 @@
         }
       }
     }
+  }
+
+  .address {
+    margin-top: 8px;
+    color: config.$grey;
   }
 }

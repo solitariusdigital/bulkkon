@@ -53,7 +53,6 @@ export default function Company() {
       address: address.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
-      price: {},
       active: true,
     };
 

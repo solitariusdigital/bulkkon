@@ -8,7 +8,7 @@ import CompanyList from "@/components/CompanyList";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 
-export default function Admin({ company }) {
+export default function Admin({ companyData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [pageType, setPageType] = useState(
@@ -38,8 +38,8 @@ export default function Admin({ company }) {
         ))}
       </div>
       {pageType === "شرکت جدید" && <Company />}
-      {pageType === "ثبت قیمت" && <Price />}
-      {pageType === "شرکت‌ها" && <CompanyList company={company} />}
+      {pageType === "ثبت قیمت" && <Price companyData={companyData} />}
+      {pageType === "شرکت‌ها" && <CompanyList companyData={companyData} />}
     </div>
   );
 }
@@ -47,11 +47,11 @@ export default function Admin({ company }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    const company = await companyModel.find();
+    const companyData = await companyModel.find();
 
     return {
       props: {
-        company: JSON.parse(JSON.stringify(company)),
+        companyData: JSON.parse(JSON.stringify(companyData)),
       },
     };
   } catch (error) {
