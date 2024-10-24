@@ -4,13 +4,18 @@ import classes from "./admin.module.scss";
 import Company from "@/components/forms/Company";
 import Router from "next/router";
 import Price from "@/components/forms/Price";
+import CompanyList from "@/components/CompanyList";
+import dbConnect from "@/services/dbConnect";
+import companyModel from "@/models/Company";
 
-export default function Admin() {
+export default function Admin({ company }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [formType, setFormType] = useState("شرکت" || "قیمت");
+  const [pageType, setPageType] = useState(
+    "شرکت جدید" || "ثبت قیمت" || "شرکت‌ها"
+  );
 
-  const navigation = ["شرکت", "قیمت"];
+  const navigation = ["شرکت جدید", "ثبت قیمت", "شرکت‌ها"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
@@ -25,15 +30,34 @@ export default function Admin() {
         {navigation.map((nav, index) => (
           <p
             key={index}
-            className={formType === nav ? classes.navActive : classes.nav}
-            onClick={() => setFormType(nav)}
+            className={pageType === nav ? classes.navActive : classes.nav}
+            onClick={() => setPageType(nav)}
           >
             {nav}
           </p>
         ))}
       </div>
-      {formType === "شرکت" && <Company />}
-      {formType === "قیمت" && <Price />}
+      {pageType === "شرکت جدید" && <Company />}
+      {pageType === "ثبت قیمت" && <Price />}
+      {pageType === "شرکت‌ها" && <CompanyList company={company} />}
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const company = await companyModel.find();
+
+    return {
+      props: {
+        company: JSON.parse(JSON.stringify(company)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

@@ -1,10 +1,18 @@
-import { useContext, Fragment, useState } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import secureLocalStorage from "react-secure-storage";
-import Router from "next/router";
+import loaderImage from "@/assets/loader.png";
+import {
+  fourGenerator,
+  sixGenerator,
+  uploadMedia,
+  extractParagraphs,
+} from "@/services/utility";
+import { createCompanyApi } from "@/services/api";
 
 export default function Company() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -15,15 +23,43 @@ export default function Company() {
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
   const [disableButton, setDisableButton] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
 
-  const handleSubmit = () => {
+  const sourceLink = "https://kimpur.storage.c2.liara.space";
+  const router = useRouter();
+
+  const handleSubmit = async () => {
     if (!name || !manager || !contact || !address || !description || !media) {
       showAlert("همه موارد الزامیست");
       return;
     }
-    showAlert("ذخیره شد");
+
+    setLoader(true);
     setDisableButton(true);
+
+    let mediaLink = "";
+    let mediaFormat = ".jpg";
+    let mediaFolder = "company";
+    const subFolder = `com${sixGenerator()}`;
+    let mediaId = `img${fourGenerator()}`;
+    mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+    await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
+
+    const companyObject = {
+      name: name.trim(),
+      manager: manager.trim(),
+      contact: contact.trim(),
+      address: address.trim(),
+      description: extractParagraphs(description).join("\n\n"),
+      media: mediaLink,
+      price: {},
+      active: true,
+    };
+
+    await createCompanyApi(companyObject);
+    showAlert("ذخیره شد");
+    router.reload(router.asPath);
   };
 
   const showAlert = (message) => {
@@ -183,6 +219,11 @@ export default function Company() {
           )}
         </div>
         <p className={classes.alert}>{alert}</p>
+        {loader && (
+          <div>
+            <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+          </div>
+        )}
         <button disabled={disableButton} onClick={() => handleSubmit()}>
           ذخیره داده
         </button>

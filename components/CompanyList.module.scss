@@ -1,0 +1,43 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 12px;
+  direction: rtl;
+  max-width: config.$max-widthHeigh;
+  width: config.$content-width;
+  font-weight: 300;
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.card {
+  width: 100%;
+  padding: 12px;
+  box-shadow: config.$card-shadow;
+  background: config.$white;
+  border: 1px solid config.$white;
+  @include mixins.border-radius();
+
+  .row {
+    margin: 8px 0px;
+    @include mixins.row-space-between-center();
+
+    .phone {
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
+      }
+    }
+  }
+}

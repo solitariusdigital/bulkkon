@@ -8,7 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "outline.storage.iran.liara.space",
+        hostname: "kimpur.storage.iran.liara.space",
         port: "",
         pathname: "/**",
       },
