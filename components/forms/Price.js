@@ -58,7 +58,7 @@ export default function Price({ companyData }) {
     setAlert(message);
     setTimeout(() => {
       setAlert("");
-    }, 3000);
+    }, 1500);
   };
 
   return (

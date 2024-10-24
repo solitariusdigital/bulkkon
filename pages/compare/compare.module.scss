@@ -8,6 +8,11 @@
   margin: 50px auto;
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
   .button {
     margin: 20px 0px;
     @include mixins.button(config.$brand, config.$brand, config.$white);

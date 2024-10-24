@@ -66,20 +66,6 @@ export default function Table({ companyData }) {
     return date;
   };
 
-  const sortPricesByDate = (prices) => {
-    const sortedKeys = Object.keys(prices).sort((a, b) => {
-      return (
-        new Date(a.replace(/-/g, "/")).getTime() -
-        new Date(b.replace(/-/g, "/")).getTime()
-      );
-    });
-    const sortedPrices = {};
-    sortedKeys.forEach((key) => {
-      sortedPrices[key] = prices[key];
-    });
-    return sortedPrices;
-  };
-
   return (
     <table className={classes.table}>
       <thead>
@@ -148,7 +134,6 @@ export default function Table({ companyData }) {
                 <td colSpan={screenSize !== "mobile" ? 5 : 4}>
                   <Chart
                     chartId={`chart-${fourGenerator()}`}
-                    priceData={sortPricesByDate(company.price)}
                     companyData={company}
                     legend={false}
                   />

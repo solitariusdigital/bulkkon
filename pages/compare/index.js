@@ -3,14 +3,21 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./compare.module.scss";
 import dynamic from "next/dynamic";
 import { fourGenerator } from "@/services/utility";
+import dbConnect from "@/services/dbConnect";
+import companyModel from "@/models/Company";
 
-const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
+const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
+  ssr: false,
+});
 
-export default function Compare() {
-  const [companyOne, setCompanyOne] = useState("");
-  const [companyTwo, setCompanyTwo] = useState("");
+export default function Compare({ companyData }) {
+  const [companyOne, setCompanyOne] = useState(null);
+  const [companyTwo, setCompanyTwo] = useState(null);
+  const [renderChart, setRenderChart] = useState(false);
 
-  const companies = ["شرکت قوام", "شرکت اوین", "شرکت خردمند"];
+  const [companies, setCompanies] = useState(
+    companyData.map((company) => company.name)
+  );
 
   return (
     <div className={classes.container}>
@@ -20,7 +27,11 @@ export default function Compare() {
           <select
             defaultValue={"default"}
             onChange={(e) => {
-              setCompanyOne(e.target.value);
+              setCompanyOne(companyData[e.target.value]);
+              setRenderChart(false);
+              setTimeout(() => {
+                setRenderChart(true);
+              }, 10);
             }}
           >
             <option value="default" disabled>
@@ -28,7 +39,7 @@ export default function Compare() {
             </option>
             {companies.map((company, index) => {
               return (
-                <option key={index} value={company}>
+                <option key={index} value={index}>
                   {company}
                 </option>
               );
@@ -39,7 +50,11 @@ export default function Compare() {
           <select
             defaultValue={"default"}
             onChange={(e) => {
-              setCompanyTwo(e.target.value);
+              setCompanyTwo(companyData[e.target.value]);
+              setRenderChart(false);
+              setTimeout(() => {
+                setRenderChart(true);
+              }, 10);
             }}
           >
             <option value="default" disabled>
@@ -47,7 +62,7 @@ export default function Compare() {
             </option>
             {companies.map((company, index) => {
               return (
-                <option key={index} value={company}>
+                <option key={index} value={index}>
                   {company}
                 </option>
               );
@@ -59,15 +74,40 @@ export default function Compare() {
         <Fragment>
           <div className={classes.text}>
             <p>مقایسه</p>
-            <p className={classes.name}>{companyOne}</p>
+            <p className={classes.name}>{companyOne.name}</p>
             <p>با</p>
-            <p className={classes.name}>{companyTwo}</p>
+            <p className={classes.name}>{companyTwo.name}</p>
           </div>
-          <div className={classes.chart}>
-            <Chart chartId={`chart-${fourGenerator()}`} legend={true} />
-          </div>
+          {renderChart && (
+            <div className={classes.chart}>
+              <ChartCompare
+                chartId={`chart-${fourGenerator()}`}
+                companyOne={companyOne}
+                companyTwo={companyTwo}
+                legend={true}
+              />
+            </div>
+          )}
         </Fragment>
       )}
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const companyData = await companyModel.find();
+
+    return {
+      props: {
+        companyData: JSON.parse(JSON.stringify(companyData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

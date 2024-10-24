@@ -3,23 +3,33 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./Chart.module.scss";
 import c3 from "c3";
 import "c3/c3.css";
-import { sortPricesByDate } from "@/services/utility";
 
-const Chart = ({ chartId, legend, companyData }) => {
+const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
-  let dateValues = Object.keys(companyData.price);
+  const dateValues = [
+    ...new Set([
+      ...Object.keys(companyOne.price),
+      ...Object.keys(companyTwo.price),
+    ]),
+  ].sort();
   dateValues.unshift("x");
 
-  let priceValues = Object.values(sortPricesByDate(companyData.price));
-  priceValues.unshift(companyData.name);
+  const priceValuesOne = dateValues.map(
+    (date) => companyOne.price[date] || null
+  );
+  const priceValuesTwo = dateValues.map(
+    (date) => companyTwo.price[date] || null
+  );
+  priceValuesOne.unshift(companyOne.name);
+  priceValuesTwo.unshift(companyTwo.name);
 
   useEffect(() => {
     const chart = c3.generate({
       bindto: `#${chartId}`,
       data: {
         x: "x",
-        columns: [dateValues, priceValues],
+        columns: [dateValues, priceValuesOne, priceValuesTwo],
       },
       axis: {
         x: {
@@ -58,4 +68,4 @@ const Chart = ({ chartId, legend, companyData }) => {
   return <div id={chartId} className={classes.chart}></div>;
 };
 
-export default Chart;
+export default ChartCompare;
