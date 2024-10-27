@@ -16,7 +16,7 @@ export default function Home({ companyData }) {
         className={classes.button}
         onClick={() => Router.push("/compare")}
       >
-        مقایسه قیمت
+        ابزار مقایسه قیمت
       </button>
       <div className={classes.table}>
         <Table companyData={companyData} />

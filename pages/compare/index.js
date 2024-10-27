@@ -72,11 +72,13 @@ export default function Compare({ companyData }) {
       </div>
       {companyOne && companyTwo && (
         <Fragment>
-          <div className={classes.text}>
-            <p>مقایسه</p>
-            <p className={classes.name}>{companyOne.name}</p>
-            <p>با</p>
-            <p className={classes.name}>{companyTwo.name}</p>
+          <div className={classes.textContainer}>
+            <div className={classes.text}>
+              <p>مقایسه</p>
+              <p className={classes.name}>{companyOne.name}</p>
+              <p>با</p>
+              <p className={classes.name}>{companyTwo.name}</p>
+            </div>
           </div>
           {renderChart && (
             <div className={classes.chart}>

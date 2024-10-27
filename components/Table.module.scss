@@ -7,11 +7,15 @@
   justify-content: space-between;
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
-  padding: 12px;
+  padding: 8px;
   margin: auto;
   box-shadow: config.$card-shadow;
   background: config.$white;
-  @include mixins.border-radius();
+  border: 1px solid config.$grey;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
 
   .header,
   .information {
@@ -25,8 +29,9 @@
     }
 
     th {
-      color: config.$grey;
+      color: config.$greyText;
       font-weight: 100;
+      font-size: small;
     }
 
     .icon {
@@ -36,7 +41,9 @@
   }
 
   .information {
-    margin: 4px 0px;
+    margin: 8px 0px;
+    background: config.$background;
+    border: 1px solid config.$grey;
 
     @include mixins.allDesktop {
       &:hover {

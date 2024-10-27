@@ -27,7 +27,6 @@
   box-shadow: config.$card-shadow;
   background: config.$white;
   border: 1px solid config.$white;
-  @include mixins.border-radius();
 
   .row {
     margin: 8px 0px;
@@ -51,6 +50,6 @@
 
   .address {
     margin-top: 8px;
-    color: config.$grey;
+    color: config.$greyText;
   }
 }

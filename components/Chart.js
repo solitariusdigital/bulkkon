@@ -25,26 +25,45 @@ const Chart = ({ chartId, legend, companyData }) => {
         x: {
           type: "timeseries",
           tick: {
-            format: "%Y-%m-%d",
+            format: screenSize !== "mobile" ? "%Y-%m-%d" : "%m-%d",
+            count: generateAxisCount(),
           },
-          show: screenSize !== "mobile",
+          label: {
+            text: "تاریخ",
+            position: "inner-right",
+          },
         },
         y: {
-          show: false,
+          tick: {
+            format: function (value) {
+              return (value / 1000)
+                .toFixed(0)
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Convert to thousands and format with commas
+            },
+            count: generateAxisCount(),
+          },
+          label: {
+            text: "هزار تومان",
+            position: "outer-top",
+          },
         },
       },
       legend: {
         show: legend,
       },
       padding: {
-        left: 20,
-        right: 20,
+        right: 30,
       },
       tooltip: {
         format: {
           value: (value, ratio, id) => {
             return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
           },
+        },
+      },
+      grid: {
+        y: {
+          show: true,
         },
       },
     });
@@ -54,6 +73,25 @@ const Chart = ({ chartId, legend, companyData }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const generateAxisCount = () => {
+    let count = 0;
+    switch (screenSize) {
+      case "desktop":
+        count = 9;
+        break;
+      case "tablet-landscape":
+        count = 7;
+        break;
+      case "tablet-portrait":
+        count = 5;
+        break;
+      case "mobile":
+        count = 5;
+        break;
+    }
+    return count;
+  };
 
   return <div id={chartId} className={classes.chart}></div>;
 };

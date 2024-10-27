@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto;
+  margin: 20px auto;
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
 
@@ -25,13 +25,21 @@
 
     select {
       @include mixins.input();
-      width: 150px;
+      width: 160px;
     }
   }
 
-  .text {
-    margin-bottom: 20px;
+  .textContainer {
+    background: config.$lightGrey;
+    border: 1px solid config.$grey;
+    width: 100%;
+    padding: 12px 4px;
     @include mixins.row-space-between-center();
+
+    .text {
+      display: flex;
+      flex-direction: row-reverse;
+    }
 
     .name {
       font-weight: bold;
@@ -47,6 +55,11 @@
     box-shadow: config.$card-shadow;
     background: config.$white;
     width: 100%;
-    @include mixins.border-radius();
+    border: 1px solid config.$grey;
+    border-top: none;
+
+    @include mixins.mobile {
+      padding: 4px;
+    }
   }
 }

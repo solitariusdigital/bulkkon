@@ -3,9 +3,9 @@
 
 .chart {
   width: 100%;
-  height: 300px;
+  height: 350px;
 
   @include mixins.mobile {
-    height: 150px;
+    height: 250px;
   }
 }

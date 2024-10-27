@@ -72,11 +72,13 @@ export default function Table({ companyData }) {
         <tr className={classes.header}>
           <th>شرکت</th>
           <th>قیمت امروز</th>
-          {screenSize !== "mobile" && <th>قیمت دیروز</th>}
+          <th>قیمت دیروز</th>
           <th>تغییر</th>
-          <th className={classes.icon}>
-            <ExpandLessIcon sx={{ color: "#ffffff" }} />
-          </th>
+          {screenSize !== "mobile" && (
+            <th className={classes.icon}>
+              <ExpandLessIcon sx={{ color: "#ffffff", fontSize: "30px" }} />
+            </th>
+          )}
         </tr>
       </thead>
       <tbody>
@@ -100,9 +102,7 @@ export default function Table({ companyData }) {
                 </div>
               </td>
               <td>{convertNumber(findPriceDates(company.price, false))}</td>
-              {screenSize !== "mobile" && (
-                <td>{convertNumber(findPriceDates(company.price, true))}</td>
-              )}
+              <td>{convertNumber(findPriceDates(company.price, true))}</td>
               <td
                 style={{
                   color:
@@ -115,27 +115,31 @@ export default function Table({ companyData }) {
                 {calculateChange(company.price).direction}
                 {calculateChange(company.price).percentageChange}
               </td>
-              <td className={classes.icon}>
-                {expandedItem === index ? (
-                  <ExpandLessIcon
-                    className="icon"
-                    onClick={() => expandInformation(index)}
-                  />
-                ) : (
-                  <ExpandMoreIcon
-                    className="icon"
-                    onClick={() => expandInformation(index)}
-                  />
-                )}
-              </td>
+              {screenSize !== "mobile" && (
+                <td className={classes.icon}>
+                  {expandedItem === index ? (
+                    <ExpandLessIcon
+                      sx={{ color: "#13426b", fontSize: "30px" }}
+                      className="icon"
+                      onClick={() => expandInformation(index)}
+                    />
+                  ) : (
+                    <ExpandMoreIcon
+                      sx={{ color: "#13426b", fontSize: "30px" }}
+                      className="icon"
+                      onClick={() => expandInformation(index)}
+                    />
+                  )}
+                </td>
+              )}
             </tr>
             <tr>
               {expandedItem === index && (
-                <td colSpan={screenSize !== "mobile" ? 5 : 4}>
+                <td>
                   <Chart
                     chartId={`chart-${fourGenerator()}`}
                     companyData={company}
-                    legend={false}
+                    legend={true}
                   />
                 </td>
               )}

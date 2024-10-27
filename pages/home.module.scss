@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 50px auto;
+  margin: 20px auto;
 
   .button {
     @include mixins.button(config.$brand, config.$brand, config.$white);

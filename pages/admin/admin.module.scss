@@ -21,7 +21,7 @@
   margin-bottom: 50px;
   border-radius: 4px;
   height: 40px;
-  border: 1px solid config.$lightgrey;
+  border: 1px solid config.$grey;
   background: config.$white;
   text-transform: capitalize;
   @include mixins.row-space-between-center();

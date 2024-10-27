@@ -19,7 +19,7 @@
   }
 
   .label {
-    color: config.$grey;
+    color: config.$greyText;
 
     span {
       color: config.$red;
@@ -103,7 +103,7 @@
 
   p {
     font-size: small;
-    color: config.$grey;
+    color: config.$greyText;
 
     @include mixins.allDesktop {
       &:hover {
