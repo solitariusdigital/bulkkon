@@ -85,11 +85,11 @@ export default function RootLayout({ children }) {
     <Fragment>
       {appLoader ? (
         <div>
-          <section className="main">
-            <main>{children}</main>
-          </section>
           <section>
             <Footer />
+          </section>
+          <section className="main">
+            <main>{children}</main>
           </section>
         </div>
       ) : (

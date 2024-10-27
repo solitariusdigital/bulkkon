@@ -85,6 +85,7 @@ export default function Table({ companyData }) {
         {companyData.map((company, index) => (
           <Fragment key={index}>
             <tr
+              style={{ background: index % 2 !== 0 ? "#ffffff" : "#e7ecf0" }}
               className={classes.information}
               onClick={() =>
                 setExpandedItem(expandedItem === index ? null : index)

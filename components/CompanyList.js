@@ -30,8 +30,8 @@ export default function CompanyList({ companyData }) {
             </p>
             <h4>{comp.manager}</h4>
           </div>
-          <p>{comp.description}</p>
           <p className={classes.address}>{comp.address}</p>
+          <p>{comp.description}</p>
         </div>
       ))}
     </div>

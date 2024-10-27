@@ -2,11 +2,9 @@
 @use "styles/_mixins.scss" as mixins;
 
 .footer {
-  margin: auto;
+  margin: 20px auto;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
-  margin-top: 100px;
-  margin-bottom: 20px;
 }
 
 .navigation {
