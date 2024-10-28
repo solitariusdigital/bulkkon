@@ -41,12 +41,47 @@
       flex-direction: row-reverse;
     }
 
-    .name {
-      font-weight: bold;
-    }
-
     p {
       margin: 0px 4px;
+    }
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 20px;
+    box-shadow: config.$card-shadow;
+    border: 1px solid config.$grey;
+    border-bottom: none;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
+
+    .info,
+    .header {
+      padding: 8px;
+      border-bottom: 1px solid config.$grey;
+      @include mixins.row-space-between-center();
+
+      p {
+        display: flex;
+        justify-content: center;
+        width: 80px;
+
+        @include mixins.mobile {
+          font-size: small;
+        }
+      }
+    }
+
+    .header {
+      background: config.$lightGrey;
+
+      p {
+        font-size: small;
+      }
     }
   }
 

@@ -56,6 +56,48 @@ export function sortPricesByDate(prices) {
   return sortedPrices;
 }
 
+export function getCurrentDate(isYesterday = false) {
+  const now = new Date();
+  if (isYesterday) {
+    now.setDate(now.getDate() - 1);
+  }
+  const date = now.toLocaleDateString("fa-IR", {
+    timeZone: "Asia/Tehran",
+  });
+  return date;
+}
+
+export function findPriceDates(price, isYesterday) {
+  let todayDate = getCurrentDate(isYesterday);
+  let value;
+  for (const key in price) {
+    if (key === convertFaToEn(todayDate)) {
+      value = price[key];
+    }
+  }
+  return value ? value : "-";
+}
+
+export function calculatePriceChange(priceObject) {
+  let today = findPriceDates(priceObject, false);
+  let yesterday = findPriceDates(priceObject, true);
+  const changeAmount = today - yesterday;
+  const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2);
+  const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : "0";
+  if (today !== "-" && yesterday !== "-") {
+    return {
+      percentageChange: percentageChange + "%",
+      changeAmount: changeAmount,
+      direction: direction,
+    };
+  } else {
+    return {
+      percentageChange: "-",
+      direction: " ",
+    };
+  }
+}
+
 export function onlyLettersAndNumbers(str) {
   return Boolean(str.match(/^[A-Za-z0-9]*$/));
 }

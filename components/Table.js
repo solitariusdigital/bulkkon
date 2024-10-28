@@ -10,6 +10,9 @@ import {
   fourGenerator,
   convertFaToEn,
   convertNumber,
+  getCurrentDate,
+  findPriceDates,
+  calculatePriceChange,
 } from "@/services/utility";
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
@@ -23,47 +26,6 @@ export default function Table({ companyData }) {
     if (expandedItem === index) {
       setExpandedItem(null);
     }
-  };
-
-  const calculateChange = (priceObject) => {
-    let today = findPriceDates(priceObject, false);
-    let yesterday = findPriceDates(priceObject, true);
-    const changeAmount = today - yesterday;
-    const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2); // Fixed to 2 decimal places
-    const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : null;
-    if (today !== "-" && yesterday !== "-") {
-      return {
-        percentageChange: percentageChange + "%",
-        changeAmount: changeAmount,
-        direction: direction,
-      };
-    } else {
-      return {
-        percentageChange: "-",
-      };
-    }
-  };
-
-  const findPriceDates = (price, isYesterday) => {
-    let todayDate = getCurrentDate(isYesterday);
-    let value;
-    for (const key in price) {
-      if (key === convertFaToEn(todayDate)) {
-        value = price[key];
-      }
-    }
-    return value ? value : "-";
-  };
-
-  const getCurrentDate = (isYesterday = false) => {
-    const now = new Date();
-    if (isYesterday) {
-      now.setDate(now.getDate() - 1);
-    }
-    const date = now.toLocaleDateString("fa-IR", {
-      timeZone: "Asia/Tehran",
-    });
-    return date;
   };
 
   return (
@@ -107,26 +69,28 @@ export default function Table({ companyData }) {
               <td
                 style={{
                   color:
-                    calculateChange(company.price).direction === "+"
+                    calculatePriceChange(company.price).direction === "+"
                       ? "#4eba5c"
-                      : "#e43137",
+                      : !calculatePriceChange(company.price).direction
+                      ? "#e43137"
+                      : "#0a0a0a",
                   fontWeight: "500",
                 }}
               >
-                {calculateChange(company.price).direction}
-                {calculateChange(company.price).percentageChange}
+                {calculatePriceChange(company.price).direction}
+                {calculatePriceChange(company.price).percentageChange}
               </td>
               {screenSize !== "mobile" && (
                 <td className={classes.icon}>
                   {expandedItem === index ? (
                     <ExpandLessIcon
-                      sx={{ color: "#13426b", fontSize: "30px" }}
+                      sx={{ fontSize: "30px" }}
                       className="icon"
                       onClick={() => expandInformation(index)}
                     />
                   ) : (
                     <ExpandMoreIcon
-                      sx={{ color: "#13426b", fontSize: "30px" }}
+                      sx={{ fontSize: "30px" }}
                       className="icon"
                       onClick={() => expandInformation(index)}
                     />

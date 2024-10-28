@@ -1,8 +1,14 @@
-import { useContext, Fragment, useState } from "react";
+import { useContext, Fragment, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./compare.module.scss";
 import dynamic from "next/dynamic";
-import { fourGenerator } from "@/services/utility";
+import {
+  fourGenerator,
+  convertNumber,
+  getCurrentDate,
+  findPriceDates,
+  calculatePriceChange,
+} from "@/services/utility";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 
@@ -11,6 +17,7 @@ const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
 });
 
 export default function Compare({ companyData }) {
+  const { navigationBar, setNavigationBar } = useContext(StateContext);
   const [companyOne, setCompanyOne] = useState(null);
   const [companyTwo, setCompanyTwo] = useState(null);
   const [renderChart, setRenderChart] = useState(false);
@@ -18,6 +25,14 @@ export default function Compare({ companyData }) {
   const [companies, setCompanies] = useState(
     companyData.map((company) => company.name)
   );
+
+  useEffect(() => {
+    navigationBar.map((nav) => {
+      nav.active = false;
+    });
+    setNavigationBar([...navigationBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={classes.container}>
@@ -75,9 +90,9 @@ export default function Compare({ companyData }) {
           <div className={classes.textContainer}>
             <div className={classes.text}>
               <p>مقایسه</p>
-              <p className={classes.name}>{companyOne.name}</p>
+              <p>{companyOne.name}</p>
               <p>با</p>
-              <p className={classes.name}>{companyTwo.name}</p>
+              <p>{companyTwo.name}</p>
             </div>
           </div>
           {renderChart && (
@@ -90,6 +105,52 @@ export default function Compare({ companyData }) {
               />
             </div>
           )}
+          <div className={classes.infoContainer}>
+            <div className={classes.header}>
+              <p>شرکت</p>
+              <p>قیمت امروز</p>
+              <p>قیمت دیروز</p>
+              <p>تغییر</p>
+            </div>
+            <div className={classes.info}>
+              <p>{companyOne.name}</p>
+              <p>{convertNumber(findPriceDates(companyOne.price, false))}</p>
+              <p>{convertNumber(findPriceDates(companyOne.price, true))}</p>
+              <p
+                style={{
+                  color:
+                    calculatePriceChange(companyOne.price).direction === "+"
+                      ? "#4eba5c"
+                      : !calculatePriceChange(companyOne.price).direction
+                      ? "#e43137"
+                      : "#0a0a0a",
+                  fontWeight: "500",
+                }}
+              >
+                {calculatePriceChange(companyOne.price).direction}
+                {calculatePriceChange(companyOne.price).percentageChange}
+              </p>
+            </div>
+            <div className={classes.info}>
+              <p>{companyTwo.name}</p>
+              <p>{convertNumber(findPriceDates(companyTwo.price, false))}</p>
+              <p>{convertNumber(findPriceDates(companyTwo.price, true))}</p>
+              <p
+                style={{
+                  color:
+                    calculatePriceChange(companyTwo.price).direction === "+"
+                      ? "#4eba5c"
+                      : !calculatePriceChange(companyTwo.price).direction
+                      ? "#e43137"
+                      : "#0a0a0a",
+                  fontWeight: "500",
+                }}
+              >
+                {calculatePriceChange(companyTwo.price).direction}
+                {calculatePriceChange(companyTwo.price).percentageChange}
+              </p>
+            </div>
+          </div>
         </Fragment>
       )}
     </div>
