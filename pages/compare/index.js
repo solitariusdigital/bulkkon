@@ -166,7 +166,9 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const companyData = await companyModel.find();
-    let activeCompanyData = companyData.filter((comp) => comp.active);
+    let activeCompanyData = companyData.filter(
+      (comp) => comp.active && comp.price
+    );
 
     return {
       props: {

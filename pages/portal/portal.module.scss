@@ -18,7 +18,7 @@
   width: 350px;
 
   @include mixins.mobile {
-    width: calc(100% - 24px);
+    width: calc(100% - 12px);
   }
 
   .input {
