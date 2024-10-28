@@ -8,9 +8,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import dynamic from "next/dynamic";
 import {
   fourGenerator,
-  convertFaToEn,
   convertNumber,
-  getCurrentDate,
   findPriceDates,
   calculatePriceChange,
 } from "@/services/utility";
@@ -38,7 +36,7 @@ export default function Table({ companyData }) {
           <th>تغییر</th>
           {screenSize !== "mobile" && (
             <th className={classes.icon}>
-              <ExpandLessIcon sx={{ color: "#ffffff", fontSize: "30px" }} />
+              <ExpandLessIcon sx={{ color: "#ffffff", fontSize: "24px" }} />
             </th>
           )}
         </tr>
@@ -84,13 +82,13 @@ export default function Table({ companyData }) {
                 <td className={classes.icon}>
                   {expandedItem === index ? (
                     <ExpandLessIcon
-                      sx={{ fontSize: "30px" }}
+                      sx={{ fontSize: "24px" }}
                       className="icon"
                       onClick={() => expandInformation(index)}
                     />
                   ) : (
                     <ExpandMoreIcon
-                      sx={{ fontSize: "30px" }}
+                      sx={{ fontSize: "24px" }}
                       className="icon"
                       onClick={() => expandInformation(index)}
                     />

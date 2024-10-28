@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import {
   fourGenerator,
   convertNumber,
-  getCurrentDate,
   findPriceDates,
   calculatePriceChange,
 } from "@/services/utility";

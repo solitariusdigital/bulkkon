@@ -23,13 +23,14 @@
 
 .card {
   width: 100%;
-  padding: 12px;
   box-shadow: config.$card-shadow;
   background: config.$white;
   border: 1px solid config.$grey;
 
   .row {
-    margin: 8px 0px;
+    padding: 8px;
+    background: config.$greyBackground;
+
     @include mixins.row-space-between-center();
 
     .logo {
@@ -48,8 +49,11 @@
     }
   }
 
-  .address {
-    margin: 12px 0px;
-    color: config.$greyText;
+  .details {
+    padding: 8px;
+
+    p {
+      margin: 8px 0px;
+    }
   }
 }

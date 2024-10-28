@@ -20,6 +20,7 @@ const Chart = ({ chartId, legend, companyData }) => {
       data: {
         x: "x",
         columns: [dateValues, priceValues],
+        type: "spline",
       },
       axis: {
         x: {
@@ -47,6 +48,9 @@ const Chart = ({ chartId, legend, companyData }) => {
             position: "outer-top",
           },
         },
+      },
+      point: {
+        show: false,
       },
       legend: {
         show: legend,

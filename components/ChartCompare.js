@@ -30,6 +30,7 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
       data: {
         x: "x",
         columns: [dateValues, priceValuesOne, priceValuesTwo],
+        type: "spline",
       },
       axis: {
         x: {
@@ -57,6 +58,9 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
             position: "outer-top",
           },
         },
+      },
+      point: {
+        show: false,
       },
       legend: {
         show: legend,
