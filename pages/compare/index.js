@@ -19,7 +19,7 @@ export default function Compare({ companyData }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
   const [companyOne, setCompanyOne] = useState(null);
   const [companyTwo, setCompanyTwo] = useState(null);
-  const [renderChart, setRenderChart] = useState(false);
+  const [renderChart, setRenderChart] = useState(true);
 
   const [companies, setCompanies] = useState(
     companyData.map((company) => company.name)
@@ -95,61 +95,67 @@ export default function Compare({ companyData }) {
             </div>
           </div>
           {renderChart && (
-            <div className={classes.chart}>
-              <ChartCompare
-                chartId={`chart-${fourGenerator()}`}
-                companyOne={companyOne}
-                companyTwo={companyTwo}
-                legend={true}
-              />
-            </div>
+            <Fragment>
+              <div className={classes.chart}>
+                <ChartCompare
+                  chartId={`chart-${fourGenerator()}`}
+                  companyOne={companyOne}
+                  companyTwo={companyTwo}
+                  legend={true}
+                />
+              </div>
+              <div className={classes.infoContainer}>
+                <div className={classes.header}>
+                  <p>شرکت</p>
+                  <p>قیمت امروز</p>
+                  <p>قیمت دیروز</p>
+                  <p>تغییر</p>
+                </div>
+                <div className={classes.info}>
+                  <p>{companyOne.name}</p>
+                  <p>
+                    {convertNumber(findPriceDates(companyOne.price, false))}
+                  </p>
+                  <p>{convertNumber(findPriceDates(companyOne.price, true))}</p>
+                  <p
+                    style={{
+                      color:
+                        calculatePriceChange(companyOne.price).direction === "+"
+                          ? "#4eba5c"
+                          : !calculatePriceChange(companyOne.price).direction
+                          ? "#e43137"
+                          : "#0a0a0a",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {calculatePriceChange(companyOne.price).direction}
+                    {calculatePriceChange(companyOne.price).percentageChange}
+                  </p>
+                </div>
+                <div className={classes.info}>
+                  <p>{companyTwo.name}</p>
+                  <p>
+                    {convertNumber(findPriceDates(companyTwo.price, false))}
+                  </p>
+                  <p>{convertNumber(findPriceDates(companyTwo.price, true))}</p>
+                  <p
+                    style={{
+                      color:
+                        calculatePriceChange(companyTwo.price).direction === "+"
+                          ? "#4eba5c"
+                          : !calculatePriceChange(companyTwo.price).direction
+                          ? "#e43137"
+                          : "#0a0a0a",
+                      fontWeight: "500",
+                    }}
+                  >
+                    {calculatePriceChange(companyTwo.price).direction}
+                    {calculatePriceChange(companyTwo.price).percentageChange}
+                  </p>
+                </div>
+              </div>
+            </Fragment>
           )}
-          <div className={classes.infoContainer}>
-            <div className={classes.header}>
-              <p>شرکت</p>
-              <p>قیمت امروز</p>
-              <p>قیمت دیروز</p>
-              <p>تغییر</p>
-            </div>
-            <div className={classes.info}>
-              <p>{companyOne.name}</p>
-              <p>{convertNumber(findPriceDates(companyOne.price, false))}</p>
-              <p>{convertNumber(findPriceDates(companyOne.price, true))}</p>
-              <p
-                style={{
-                  color:
-                    calculatePriceChange(companyOne.price).direction === "+"
-                      ? "#4eba5c"
-                      : !calculatePriceChange(companyOne.price).direction
-                      ? "#e43137"
-                      : "#0a0a0a",
-                  fontWeight: "500",
-                }}
-              >
-                {calculatePriceChange(companyOne.price).direction}
-                {calculatePriceChange(companyOne.price).percentageChange}
-              </p>
-            </div>
-            <div className={classes.info}>
-              <p>{companyTwo.name}</p>
-              <p>{convertNumber(findPriceDates(companyTwo.price, false))}</p>
-              <p>{convertNumber(findPriceDates(companyTwo.price, true))}</p>
-              <p
-                style={{
-                  color:
-                    calculatePriceChange(companyTwo.price).direction === "+"
-                      ? "#4eba5c"
-                      : !calculatePriceChange(companyTwo.price).direction
-                      ? "#e43137"
-                      : "#0a0a0a",
-                  fontWeight: "500",
-                }}
-              >
-                {calculatePriceChange(companyTwo.price).direction}
-                {calculatePriceChange(companyTwo.price).percentageChange}
-              </p>
-            </div>
-          </div>
         </Fragment>
       )}
     </div>
@@ -160,10 +166,11 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const companyData = await companyModel.find();
+    let activeCompanyData = companyData.filter((comp) => comp.active);
 
     return {
       props: {
-        companyData: JSON.parse(JSON.stringify(companyData)),
+        companyData: JSON.parse(JSON.stringify(activeCompanyData)),
       },
     };
   } catch (error) {

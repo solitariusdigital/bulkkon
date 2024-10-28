@@ -27,10 +27,10 @@
   background: config.$white;
   border: 1px solid config.$grey;
 
-  .row {
+  .row,
+  .control {
     padding: 8px;
     background: config.$greyBackground;
-
     @include mixins.row-space-between-center();
 
     .logo {
@@ -40,6 +40,8 @@
     }
 
     .phone {
+      font-weight: bold;
+
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;
@@ -47,6 +49,10 @@
         }
       }
     }
+  }
+
+  .control {
+    justify-content: flex-end;
   }
 
   .details {

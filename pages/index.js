@@ -8,8 +8,6 @@ import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 
 export default function Home({ companyData }) {
-  const { screenSize, setScreenSize } = useContext(StateContext);
-
   return (
     <div className={classes.container}>
       <button
@@ -29,10 +27,11 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const companyData = await companyModel.find();
+    let activeCompanyData = companyData.filter((comp) => comp.active);
 
     return {
       props: {
-        companyData: JSON.parse(JSON.stringify(companyData)),
+        companyData: JSON.parse(JSON.stringify(activeCompanyData)),
       },
     };
   } catch (error) {
