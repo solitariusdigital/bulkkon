@@ -1,10 +1,10 @@
 import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./Footer.module.scss";
+import classes from "./Menu.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
 
-export default function Footer() {
+export default function Menu() {
   const { language, setLanguage } = useContext(StateContext);
   const { navigationBar, setNavigationBar } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
@@ -22,7 +22,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className={classes.footer}>
+    <div className={classes.menu}>
       <div className={classes.navigation}>
         {navigationBar.map((nav, index) => (
           <Fragment key={index}>
@@ -35,6 +35,6 @@ export default function Footer() {
           </Fragment>
         ))}
       </div>
-    </footer>
+    </div>
   );
 }

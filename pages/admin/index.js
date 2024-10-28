@@ -19,7 +19,7 @@ export default function Admin({ companyData }) {
 
   useEffect(() => {
     if (permissionControl !== "admin") {
-      Router.push("/");
+      Router.push("/portal");
     }
   }, [permissionControl]);
 

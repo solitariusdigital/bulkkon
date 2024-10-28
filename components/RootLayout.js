@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
-import Footer from "@/components/Footer";
+import Menu from "@/components/Menu";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.svg";
 import secureLocalStorage from "react-secure-storage";
@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
       {appLoader ? (
         <div>
           <section>
-            <Footer />
+            <Menu />
           </section>
           <section className="main">
             <main>{children}</main>

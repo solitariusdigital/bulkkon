@@ -1,16 +1,18 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.footer {
-  margin: 20px auto;
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  margin: auto;
+  height: 50px;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
 }
 
 .navigation {
   @include mixins.row-space-between-center();
-  width: 180px;
-  direction: rtl;
+  width: 150px;
 
   .nav {
     @include mixins.allDesktop {

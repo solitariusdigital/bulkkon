@@ -7,7 +7,7 @@
   justify-content: space-between;
   max-width: config.$max-widthHeigh;
   width: config.$content-width;
-  padding: 8px;
+  padding: 8px 0px;
   margin: auto;
   box-shadow: config.$card-shadow;
   background: config.$white;
@@ -44,6 +44,8 @@
     margin: 8px 0px;
     background: config.$background;
     border: 1px solid config.$grey;
+    border-left: none;
+    border-right: none;
 
     @include mixins.allDesktop {
       &:hover {

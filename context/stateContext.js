@@ -9,18 +9,13 @@ export const StateProvider = (props) => {
   const [permissionControl, setPermissionControl] = useState("user" || "admin");
   const [navigationBar, setNavigationBar] = useState([
     {
-      title: "home",
+      title: "صفحه اصلی",
       link: "/",
       active: false,
     },
     {
-      title: "admin",
+      title: "پورتال",
       link: "/admin",
-      active: false,
-    },
-    {
-      title: "portal",
-      link: "/portal",
       active: false,
     },
   ]);
