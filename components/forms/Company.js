@@ -12,25 +12,40 @@ import {
   uploadMedia,
   extractParagraphs,
 } from "@/services/utility";
-import { createCompanyApi } from "@/services/api";
+import { createCompanyApi, updateCompanyApi } from "@/services/api";
 
-export default function Company() {
+export default function Company({ companyData }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [name, setName] = useState("");
   const [manager, setManager] = useState("");
   const [contact, setContact] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
-  const [media, setMedia] = useState("");
+  const [newMedia, setNewMedia] = useState("");
+  const [editMedia, setEditMedia] = useState("");
+  const [isMediaChanging, setIsMediaChanging] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
+  const [editCompany, setEditCompany] = useState(false);
+  const [editCompanyData, setEditCompanyData] = useState(null);
   const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
+
+  const [companies, setCompanies] = useState(
+    companyData.map((company) => company.name)
+  );
 
   const sourceLink = "https://kimpur.storage.c2.liara.space";
   const router = useRouter();
 
-  const handleSubmit = async () => {
-    if (!name || !manager || !contact || !address || !description || !media) {
+  const createCompany = async () => {
+    if (
+      !name ||
+      !manager ||
+      !contact ||
+      !address ||
+      !description ||
+      !newMedia
+    ) {
       showAlert("همه موارد الزامیست");
       return;
     }
@@ -44,7 +59,7 @@ export default function Company() {
     const subFolder = `com${sixGenerator()}`;
     let mediaId = `img${fourGenerator()}`;
     mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
-    await uploadMedia(media, mediaId, mediaFolder, subFolder, mediaFormat);
+    await uploadMedia(newMedia, mediaId, mediaFolder, subFolder, mediaFormat);
 
     const companyObject = {
       name: name.trim(),
@@ -59,6 +74,53 @@ export default function Company() {
     await createCompanyApi(companyObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
+  };
+
+  const updateCompany = async () => {
+    if (!name || !manager || !contact || !address || !description) {
+      showAlert("همه موارد الزامیست");
+      return;
+    }
+
+    setLoader(true);
+    setDisableButton(true);
+
+    let mediaLink = "";
+    if (isMediaChanging) {
+      let mediaFormat = ".jpg";
+      let mediaFolder = "company";
+      const subFolder = `com${sixGenerator()}`;
+      let mediaId = `img${fourGenerator()}`;
+      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
+      await uploadMedia(newMedia, mediaId, mediaFolder, subFolder, mediaFormat);
+    } else {
+      mediaLink = editMedia;
+    }
+
+    const companyObject = {
+      ...editCompanyData,
+      name: name.trim(),
+      manager: manager.trim(),
+      contact: contact.trim(),
+      address: address.trim(),
+      description: extractParagraphs(description).join("\n\n"),
+      media: mediaLink,
+    };
+
+    await updateCompanyApi(companyObject);
+    showAlert("ذخیره شد");
+    router.reload(router.asPath);
+  };
+
+  const selectCompany = (index) => {
+    setEditCompany(true);
+    setEditCompanyData(companyData[index]);
+    setName(companyData[index].name);
+    setManager(companyData[index].manager);
+    setContact(companyData[index].contact);
+    setAddress(companyData[index].address);
+    setDescription(companyData[index].description);
+    setEditMedia(companyData[index].media);
   };
 
   const showAlert = (message) => {
@@ -76,6 +138,34 @@ export default function Company() {
 
   return (
     <div className={classes.form}>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <CloseIcon
+            className="icon"
+            onClick={() => {
+              router.reload(router.asPath);
+            }}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => {
+            selectCompany(e.target.value);
+          }}
+        >
+          <option value="default" disabled>
+            ویرایش شرکت
+          </option>
+          {companies.map((company, index) => {
+            return (
+              <option key={index} value={index}>
+                {company}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>
@@ -191,18 +281,22 @@ export default function Company() {
           <label className="file">
             <input
               onChange={(e) => {
-                setMedia(e.target.files[0]);
+                setNewMedia(e.target.files[0]);
+                setIsMediaChanging(true);
               }}
               type="file"
               accept="image/*"
             />
             <p>لوگو</p>
           </label>
-          {media !== "" && (
+          {newMedia && (
             <div className={classes.preview}>
               <CloseIcon
                 className="icon"
-                onClick={() => setMedia("")}
+                onClick={() => {
+                  setNewMedia("");
+                  setIsMediaChanging(false);
+                }}
                 sx={{ fontSize: 16 }}
               />
               <Image
@@ -210,7 +304,7 @@ export default function Company() {
                 width={170}
                 height={200}
                 objectFit="contain"
-                src={URL.createObjectURL(media)}
+                src={URL.createObjectURL(newMedia)}
                 alt="image"
                 priority
               />
@@ -223,8 +317,11 @@ export default function Company() {
             <Image width={50} height={50} src={loaderImage} alt="isLoading" />
           </div>
         )}
-        <button disabled={disableButton} onClick={() => handleSubmit()}>
-          ذخیره داده
+        <button
+          disabled={disableButton}
+          onClick={() => (editCompany ? updateCompany() : createCompany())}
+        >
+          {editCompany ? "ویرایش داده" : "ذخیره داده"}
         </button>
         <div className={classes.logout} onClick={() => logOut()}>
           <p>خروج از پورتال</p>

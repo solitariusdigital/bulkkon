@@ -58,6 +58,10 @@
   .details {
     padding: 8px;
 
+    .address {
+      color: config.$greyText;
+    }
+
     p {
       margin: 8px 0px;
     }

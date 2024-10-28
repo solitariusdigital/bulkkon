@@ -12,10 +12,10 @@ export default function Admin({ companyData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [pageType, setPageType] = useState(
-    "شرکت جدید" || "ثبت قیمت" || "شرکت‌ها"
+    "فرم شرکت" || "ثبت قیمت" || "شرکت‌ها"
   );
 
-  const navigation = ["شرکت جدید", "ثبت قیمت", "شرکت‌ها"];
+  const navigation = ["فرم شرکت", "ثبت قیمت", "شرکت‌ها"];
 
   useEffect(() => {
     if (permissionControl !== "admin") {
@@ -37,7 +37,7 @@ export default function Admin({ companyData }) {
           </p>
         ))}
       </div>
-      {pageType === "شرکت جدید" && <Company />}
+      {pageType === "فرم شرکت" && <Company companyData={companyData} />}
       {pageType === "ثبت قیمت" && <Price companyData={companyData} />}
       {pageType === "شرکت‌ها" && <CompanyList companyData={companyData} />}
     </div>

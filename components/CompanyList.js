@@ -97,7 +97,7 @@ export default function CompanyList({ companyData }) {
             <h4>{comp.manager}</h4>
           </div>
           <div className={classes.details}>
-            <p>{comp.address}</p>
+            <p className={classes.address}>{comp.address}</p>
             <p>{comp.description}</p>
           </div>
         </div>
