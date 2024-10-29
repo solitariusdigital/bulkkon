@@ -7,17 +7,15 @@
   gap: 12px;
   direction: rtl;
   max-width: config.$max-widthHeigh;
-  width: config.$content-width;
+  width: 100%;
   font-weight: 300;
 
   @include mixins.tablet {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-    width: 100%;
   }
   @include mixins.mobile {
     display: flex;
     flex-direction: column;
-    width: 100%;
   }
 }
 

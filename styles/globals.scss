@@ -47,6 +47,7 @@ p {
 }
 
 .main {
+  min-height: 100vh;
   margin-top: 20px;
   margin-bottom: 100px;
 }
@@ -101,4 +102,8 @@ label.file input[type="file"] {
 .Calendar__monthSelectorItem.-active .Calendar__monthSelectorItemText,
 .Calendar__yearSelectorItem.-active .Calendar__yearSelectorText {
   background: config.$brand !important;
+}
+
+.c3-line {
+  stroke-width: 2px !important;
 }

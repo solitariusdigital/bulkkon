@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import secureLocalStorage from "react-secure-storage";
 import { getSingleUserApi } from "@/services/api";
 
@@ -95,8 +95,8 @@ export default function RootLayout({ children }) {
       ) : (
         <div className="appload">
           <Image
-            width={250}
-            height={145.29}
+            width={220}
+            height={150}
             src={logo}
             alt="logo"
             as="image"

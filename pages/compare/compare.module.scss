@@ -46,6 +46,40 @@
     }
   }
 
+  .infoBox {
+    width: 100%;
+    @include mixins.row-space-between-center();
+    align-items: flex-start;
+
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+    }
+    @include mixins.tablet {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .infoContainer {
+      width: 49%;
+
+      @include mixins.mobile {
+        width: 100%;
+      }
+      @include mixins.tablet {
+        width: 100%;
+      }
+
+      .address {
+        border-bottom: 1px solid config.$grey;
+        direction: rtl;
+        padding: 12px;
+        font-weight: 300;
+        font-size: small;
+      }
+    }
+  }
+
   .infoContainer {
     display: flex;
     flex-direction: column;
@@ -58,6 +92,9 @@
     @include mixins.mobile {
       width: 100%;
     }
+    @include mixins.tablet {
+      width: 100%;
+    }
 
     .info,
     .header {
@@ -68,7 +105,7 @@
       p {
         display: flex;
         justify-content: center;
-        width: 80px;
+        width: 100px;
 
         @include mixins.mobile {
           font-size: small;

@@ -56,8 +56,56 @@
     }
   }
 
+  .details {
+    @include mixins.row-space-between-center();
+    justify-content: flex-start;
+    padding: 0px 12px;
+    margin: 20px 0px;
+
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+      width: 100%;
+    }
+
+    .phone {
+      font-weight: bold;
+      margin: 0px 20px;
+
+      @include mixins.mobile {
+        margin: 0px;
+      }
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
+      }
+    }
+
+    td {
+      font-weight: 300;
+
+      @include mixins.mobile {
+        font-size: small;
+      }
+    }
+  }
+
   .logo {
-    position: relative;
-    height: 30px;
+    @include mixins.row-space-between-center();
+    justify-content: space-around;
+
+    .image {
+      position: relative;
+      width: 50px;
+      height: 40px;
+    }
+
+    p {
+      font-size: small;
+    }
   }
 }

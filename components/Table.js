@@ -53,13 +53,16 @@ export default function Table({ companyData }) {
             >
               <td>
                 <div className={classes.logo}>
-                  <Image
-                    src={company.media}
-                    layout="fill"
-                    objectFit="contain"
-                    alt="logo"
-                    as="image"
-                  />
+                  <div className={classes.image}>
+                    <Image
+                      src={company.media}
+                      layout="fill"
+                      objectFit="contain"
+                      alt="logo"
+                      as="image"
+                    />
+                  </div>
+                  {screenSize !== "mobile" && <p>{company.name}</p>}
                 </div>
               </td>
               <td>{convertNumber(findPriceDates(company.price, false))}</td>
@@ -96,8 +99,25 @@ export default function Table({ companyData }) {
                 </td>
               )}
             </tr>
-            <tr>
-              {expandedItem === index && (
+            {expandedItem === index && (
+              <tr className={classes.details}>
+                <td>{company.manager}</td>
+                <td
+                  className={classes.phone}
+                  onClick={() =>
+                    window.open(
+                      `tel:+98${company.contact.substring(1)}`,
+                      "_self"
+                    )
+                  }
+                >
+                  {company.contact}
+                </td>
+                <td>{company.address}</td>
+              </tr>
+            )}
+            {expandedItem === index && (
+              <tr>
                 <td>
                   <Chart
                     chartId={`chart-${fourGenerator()}`}
@@ -105,8 +125,8 @@ export default function Table({ companyData }) {
                     legend={true}
                   />
                 </td>
-              )}
-            </tr>
+              </tr>
+            )}
           </Fragment>
         ))}
       </tbody>

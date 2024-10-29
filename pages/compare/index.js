@@ -154,6 +154,52 @@ export default function Compare({ companyData }) {
                   </p>
                 </div>
               </div>
+              <div className={classes.infoBox}>
+                <div className={classes.infoContainer}>
+                  <div className={classes.header}>
+                    <p>شرکت</p>
+                    <p>نماینده</p>
+                    <p>تماس</p>
+                  </div>
+                  <div className={classes.info}>
+                    <p>{companyOne.name}</p>
+                    <p>{companyOne.manager}</p>
+                    <p
+                      onClick={() =>
+                        window.open(
+                          `tel:+98${companyOne.contact.substring(1)}`,
+                          "_self"
+                        )
+                      }
+                    >
+                      {companyOne.contact}
+                    </p>
+                  </div>
+                  <p className={classes.address}>{companyOne.address}</p>
+                </div>
+                <div className={classes.infoContainer}>
+                  <div className={classes.header}>
+                    <p>شرکت</p>
+                    <p>نماینده</p>
+                    <p>تماس</p>
+                  </div>
+                  <div className={classes.info}>
+                    <p>{companyTwo.name}</p>
+                    <p>{companyTwo.manager}</p>
+                    <p
+                      onClick={() =>
+                        window.open(
+                          `tel:+98${companyTwo.contact.substring(1)}`,
+                          "_self"
+                        )
+                      }
+                    >
+                      {companyTwo.contact}
+                    </p>
+                  </div>
+                  <p className={classes.address}>{companyTwo.address}</p>
+                </div>
+              </div>
             </Fragment>
           )}
         </Fragment>
