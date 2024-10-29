@@ -1,10 +1,8 @@
-import { useContext, Fragment, useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./CompanyList.module.scss";
 import Image from "next/legacy/image";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
@@ -94,10 +92,10 @@ export default function CompanyList({ companyData }) {
             >
               {comp.contact}
             </p>
-            <h4>{comp.manager}</h4>
+            <h4>نماینده: {comp.manager}</h4>
           </div>
           <div className={classes.details}>
-            <p className={classes.address}>{comp.address}</p>
+            <p className={classes.address}>آدرس: {comp.address}</p>
             <p>{comp.description}</p>
           </div>
         </div>

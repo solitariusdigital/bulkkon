@@ -175,7 +175,7 @@ export default function Compare({ companyData }) {
                       {companyOne.contact}
                     </p>
                   </div>
-                  <p className={classes.address}>{companyOne.address}</p>
+                  <p className={classes.address}>آدرس: {companyOne.address}</p>
                 </div>
                 <div className={classes.infoContainer}>
                   <div className={classes.header}>
@@ -197,7 +197,7 @@ export default function Compare({ companyData }) {
                       {companyTwo.contact}
                     </p>
                   </div>
-                  <p className={classes.address}>{companyTwo.address}</p>
+                  <p className={classes.address}>آدرس: {companyTwo.address}</p>
                 </div>
               </div>
             </Fragment>

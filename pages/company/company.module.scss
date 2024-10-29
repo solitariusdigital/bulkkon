@@ -1,0 +1,52 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.card {
+  margin: auto;
+  max-width: config.$max-widthHeigh;
+  width: 40%;
+  box-shadow: config.$card-shadow;
+  background: config.$white;
+  border: 1px solid config.$grey;
+  direction: rtl;
+
+  @include mixins.mobile {
+    width: calc(100% - 12px);
+  }
+
+  .row {
+    padding: 8px;
+    background: config.$greyBackground;
+    @include mixins.row-space-between-center();
+
+    .logo {
+      position: relative;
+      width: 20%;
+      height: 70px;
+    }
+
+    .phone {
+      font-weight: bold;
+
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
+      }
+    }
+  }
+
+  .details {
+    padding: 8px;
+    font-weight: 100;
+
+    .address {
+      color: config.$greyText;
+    }
+
+    p {
+      margin: 20px 0px;
+    }
+  }
+}

@@ -101,7 +101,7 @@ export default function Table({ companyData }) {
             </tr>
             {expandedItem === index && (
               <tr className={classes.details}>
-                <td>{company.manager}</td>
+                <td>نماینده: {company.manager}</td>
                 <td
                   className={classes.phone}
                   onClick={() =>
@@ -113,7 +113,12 @@ export default function Table({ companyData }) {
                 >
                   {company.contact}
                 </td>
-                <td>{company.address}</td>
+                <td
+                  className={classes.about}
+                  onClick={() => Router.push(`/company/${company.name}`)}
+                >
+                  درباره
+                </td>
               </tr>
             )}
             {expandedItem === index && (

@@ -57,26 +57,34 @@
   }
 
   .details {
+    position: relative;
     @include mixins.row-space-between-center();
     justify-content: flex-start;
     padding: 0px 12px;
     margin: 20px 0px;
 
-    @include mixins.mobile {
+    .about {
+      position: absolute;
+      left: 12px;
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      text-align: right;
-      width: 100%;
+      justify-content: center;
+      padding: 4px;
+      width: 80px;
+      background: config.$greyBackground;
+
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          background: config.$brand;
+          color: config.$white;
+        }
+      }
     }
 
     .phone {
       font-weight: bold;
       margin: 0px 20px;
 
-      @include mixins.mobile {
-        margin: 0px;
-      }
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;
