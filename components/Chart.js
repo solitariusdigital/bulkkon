@@ -29,7 +29,7 @@ const Chart = ({ chartId, legend, companyData }) => {
         x: {
           type: "timeseries",
           tick: {
-            format: screenSize !== "mobile" ? "%Y-%m-%d" : "%m-%d",
+            format: "%Y-%m-%d",
             count: generateAxisCount(),
           },
           label: {
@@ -94,7 +94,7 @@ const Chart = ({ chartId, legend, companyData }) => {
         count = 5;
         break;
       case "mobile":
-        count = 5;
+        count = 4;
         break;
     }
     return count;
