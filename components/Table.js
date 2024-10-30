@@ -35,6 +35,7 @@ export default function Table({ companyData }) {
           <th>قیمت امروز</th>
           <th>قیمت دیروز</th>
           <th>تغییر</th>
+          {screenSize !== "mobile" && <th>مقدار تغییر</th>}
           {screenSize !== "mobile" && (
             <th className={classes.icon}>
               <ExpandLessIcon sx={{ color: "#ffffff", fontSize: "24px" }} />
@@ -80,6 +81,23 @@ export default function Table({ companyData }) {
                 {calculatePriceChange(company.price).direction}
                 {calculatePriceChange(company.price).percentageChange}
               </td>
+              {screenSize !== "mobile" && (
+                <td
+                  style={{
+                    color:
+                      calculatePriceChange(company.price).direction === "+"
+                        ? "#4eba5c"
+                        : !calculatePriceChange(company.price).direction
+                        ? "#e43137"
+                        : "#0a0a0a",
+                  }}
+                >
+                  {calculatePriceChange(company.price).direction}
+                  {convertNumber(
+                    calculatePriceChange(company.price).changeAmount
+                  )}
+                </td>
+              )}
               {screenSize !== "mobile" && (
                 <td className={classes.icon}>
                   {expandedItem === index ? (

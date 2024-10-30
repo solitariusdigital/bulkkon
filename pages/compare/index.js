@@ -17,6 +17,7 @@ const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
 
 export default function Compare({ companyData }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [companyOne, setCompanyOne] = useState(null);
   const [companyTwo, setCompanyTwo] = useState(null);
   const [renderChart, setRenderChart] = useState(true);
@@ -110,6 +111,7 @@ export default function Compare({ companyData }) {
                   <p>قیمت امروز</p>
                   <p>قیمت دیروز</p>
                   <p>تغییر</p>
+                  {screenSize !== "mobile" && <p>مقدار تغییر</p>}
                 </div>
                 <div className={classes.info}>
                   <p>{companyOne.name}</p>
@@ -125,12 +127,29 @@ export default function Compare({ companyData }) {
                           : !calculatePriceChange(companyOne.price).direction
                           ? "#e43137"
                           : "#0a0a0a",
-                      fontWeight: "500",
                     }}
                   >
                     {calculatePriceChange(companyOne.price).direction}
                     {calculatePriceChange(companyOne.price).percentageChange}
                   </p>
+                  {screenSize !== "mobile" && (
+                    <p
+                      style={{
+                        color:
+                          calculatePriceChange(companyOne.price).direction ===
+                          "+"
+                            ? "#4eba5c"
+                            : !calculatePriceChange(companyOne.price).direction
+                            ? "#e43137"
+                            : "#0a0a0a",
+                      }}
+                    >
+                      {calculatePriceChange(companyOne.price).direction}
+                      {convertNumber(
+                        calculatePriceChange(companyOne.price).changeAmount
+                      )}
+                    </p>
+                  )}
                 </div>
                 <div className={classes.info}>
                   <p>{companyTwo.name}</p>
@@ -146,12 +165,29 @@ export default function Compare({ companyData }) {
                           : !calculatePriceChange(companyTwo.price).direction
                           ? "#e43137"
                           : "#0a0a0a",
-                      fontWeight: "500",
                     }}
                   >
                     {calculatePriceChange(companyTwo.price).direction}
                     {calculatePriceChange(companyTwo.price).percentageChange}
                   </p>
+                  {screenSize !== "mobile" && (
+                    <p
+                      style={{
+                        color:
+                          calculatePriceChange(companyTwo.price).direction ===
+                          "+"
+                            ? "#4eba5c"
+                            : !calculatePriceChange(companyTwo.price).direction
+                            ? "#e43137"
+                            : "#0a0a0a",
+                      }}
+                    >
+                      {calculatePriceChange(companyTwo.price).direction}
+                      {convertNumber(
+                        calculatePriceChange(companyTwo.price).changeAmount
+                      )}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className={classes.infoBox}>
@@ -165,6 +201,7 @@ export default function Compare({ companyData }) {
                     <p>{companyOne.name}</p>
                     <p>{companyOne.manager}</p>
                     <p
+                      className={classes.phone}
                       onClick={() =>
                         window.open(
                           `tel:+98${companyOne.contact.substring(1)}`,
@@ -187,6 +224,7 @@ export default function Compare({ companyData }) {
                     <p>{companyTwo.name}</p>
                     <p>{companyTwo.manager}</p>
                     <p
+                      className={classes.phone}
                       onClick={() =>
                         window.open(
                           `tel:+98${companyTwo.contact.substring(1)}`,

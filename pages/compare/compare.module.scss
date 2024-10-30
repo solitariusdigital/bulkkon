@@ -114,6 +114,15 @@
           font-size: small;
         }
       }
+
+      .phone {
+        @include mixins.allDesktop {
+          &:hover {
+            cursor: pointer;
+            color: config.$brand;
+          }
+        }
+      }
     }
 
     .header {
