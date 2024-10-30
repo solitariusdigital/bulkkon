@@ -53,7 +53,7 @@ export default function Company({ companyData }) {
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLink = "";
+    let mediaLink;
     let mediaFormat = ".jpg";
     let mediaFolder = "company";
     const subFolder = `com${sixGenerator()}`;
@@ -85,7 +85,7 @@ export default function Company({ companyData }) {
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLink = "";
+    let mediaLink;
     if (isMediaChanging) {
       let mediaFormat = ".jpg";
       let mediaFolder = "company";

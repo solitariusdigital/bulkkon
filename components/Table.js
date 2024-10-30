@@ -30,7 +30,8 @@ export default function Table({ companyData }) {
     <table className={classes.table}>
       <thead>
         <tr className={classes.header}>
-          <th>شرکت</th>
+          <th style={{ color: "#ffffff" }}>شرکت</th>
+          {screenSize === "desktop" && <th>شرکت</th>}
           <th>قیمت امروز</th>
           <th>قیمت دیروز</th>
           <th>تغییر</th>
@@ -51,20 +52,18 @@ export default function Table({ companyData }) {
                 setExpandedItem(expandedItem === index ? null : index)
               }
             >
-              <td>
-                <div className={classes.logo}>
-                  <div className={classes.image}>
-                    <Image
-                      src={company.media}
-                      layout="fill"
-                      objectFit="contain"
-                      alt="logo"
-                      as="image"
-                    />
-                  </div>
-                  {screenSize !== "mobile" && <p>{company.name}</p>}
-                </div>
+              <td className={classes.image}>
+                <Image
+                  src={company.media}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="logo"
+                  as="image"
+                />
               </td>
+              {screenSize === "desktop" && (
+                <td className={classes.name}>{company.name}</td>
+              )}
               <td>{convertNumber(findPriceDates(company.price, false))}</td>
               <td>{convertNumber(findPriceDates(company.price, true))}</td>
               <td
@@ -99,8 +98,13 @@ export default function Table({ companyData }) {
                 </td>
               )}
             </tr>
-            {expandedItem === index && (
+            {expandedItem === index && screenSize !== "desktop" && (
               <tr className={classes.details}>
+                <td>شرکت: {company.name}</td>
+              </tr>
+            )}
+            {expandedItem === index && (
+              <tr className={classes.details} style={{ marginBottom: "40px" }}>
                 <td>نماینده: {company.manager}</td>
                 <td
                   className={classes.phone}

@@ -32,6 +32,9 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
         columns: [dateValues, priceValuesOne, priceValuesTwo],
         type: "spline",
       },
+      color: {
+        pattern: ["#043d71", "#ff0d29"],
+      },
       axis: {
         x: {
           type: "timeseries",

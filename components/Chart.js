@@ -22,6 +22,9 @@ const Chart = ({ chartId, legend, companyData }) => {
         columns: [dateValues, priceValues],
         type: "spline",
       },
+      color: {
+        pattern: ["#13426b"],
+      },
       axis: {
         x: {
           type: "timeseries",
