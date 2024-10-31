@@ -83,7 +83,7 @@ export function calculatePriceChange(priceObject) {
   let yesterday = findPriceDates(priceObject, true);
   const changeAmount = today - yesterday;
   const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2);
-  const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : "0";
+  const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : " ";
   if (today !== "-" && yesterday !== "-") {
     return {
       percentageChange: percentageChange + "%",
@@ -93,6 +93,7 @@ export function calculatePriceChange(priceObject) {
   } else {
     return {
       percentageChange: "-",
+      changeAmount: "-",
       direction: " ",
     };
   }
