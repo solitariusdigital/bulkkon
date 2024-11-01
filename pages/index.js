@@ -6,20 +6,48 @@ import Image from "next/legacy/image";
 import Table from "@/components/Table";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
+import { NextSeo } from "next-seo";
+import logo from "@/assets/logo.png";
 
 export default function Home({ companyData }) {
   return (
-    <div className={classes.container}>
-      <button
-        className={classes.button}
-        onClick={() => Router.push("/compare")}
-      >
-        ابزار مقایسه قیمت
-      </button>
-      <div className={classes.table}>
-        <Table companyData={companyData} />
+    <Fragment>
+      <NextSeo
+        title="Kimpur"
+        description="Kimpur Price"
+        canonical="https://www.kimpur.com"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://www.kimpur.com",
+          title: "Kimpur",
+          description: "Kimpur Price",
+          siteName: "Kimpur",
+          images: {
+            url: logo,
+            width: 1200,
+            height: 630,
+            alt: "Kimpur",
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
+        }}
+      />
+      <div className={classes.container}>
+        <button
+          className={classes.button}
+          onClick={() => Router.push("/compare")}
+        >
+          ابزار مقایسه قیمت
+        </button>
+        <div className={classes.table}>
+          <Table companyData={companyData} />
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 

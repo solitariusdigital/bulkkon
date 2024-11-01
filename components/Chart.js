@@ -20,10 +20,9 @@ const Chart = ({ chartId, legend, companyData }) => {
       data: {
         x: "x",
         columns: [dateValues, priceValues],
-        type: "spline",
       },
       color: {
-        pattern: ["#13426b"],
+        pattern: ["#043d71"],
       },
       axis: {
         x: {

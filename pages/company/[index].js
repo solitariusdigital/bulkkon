@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./company.module.scss";
 import Image from "next/legacy/image";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
+import { NextSeo } from "next-seo";
 
 export default function Company({ companyData }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
@@ -17,35 +18,66 @@ export default function Company({ companyData }) {
   }, []);
 
   return (
-    <div className={classes.card}>
-      <div className={classes.row}>
-        <div className={classes.logo}>
-          <Image
-            src={companyData.media}
-            layout="fill"
-            objectFit="contain"
-            alt="logo"
-            as="image"
-          />
+    <Fragment>
+      <NextSeo
+        title={companyData.name}
+        description={companyData.description}
+        canonical={`https://kimpur.com/company/${companyData.name}`}
+        openGraph={{
+          type: "article",
+          locale: "fa_IR",
+          url: `https://kimpur.com/company/${companyData.name}`,
+          title: `${companyData.name}`,
+          description: `${companyData.description}`,
+          siteName: "kimpur",
+          article: {
+            publishedTime: companyData.createdAt,
+            modifiedTime: companyData.updatedAt,
+            authors: ["https://www.kimpur.com"],
+          },
+          images: {
+            url: companyData.media,
+            width: 1200,
+            height: 630,
+            alt: companyData.name,
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
+        }}
+      />
+      <div className={classes.card}>
+        <div className={classes.row}>
+          <div className={classes.logo}>
+            <Image
+              src={companyData.media}
+              layout="fill"
+              objectFit="contain"
+              alt="logo"
+              as="image"
+            />
+          </div>
+          <h3>{companyData.name}</h3>
         </div>
-        <h3>{companyData.name}</h3>
+        <div className={classes.row}>
+          <p
+            className={classes.phone}
+            onClick={() =>
+              window.open(`tel:+98${companyData.contact.substring(1)}`, "_self")
+            }
+          >
+            {companyData.contact}
+          </p>
+          <h4>نماینده: {companyData.manager}</h4>
+        </div>
+        <div className={classes.details}>
+          <p className={classes.address}>آدرس: {companyData.address}</p>
+          <p>{companyData.description}</p>
+        </div>
       </div>
-      <div className={classes.row}>
-        <p
-          className={classes.phone}
-          onClick={() =>
-            window.open(`tel:+98${companyData.contact.substring(1)}`, "_self")
-          }
-        >
-          {companyData.contact}
-        </p>
-        <h4>نماینده: {companyData.manager}</h4>
-      </div>
-      <div className={classes.details}>
-        <p className={classes.address}>آدرس: {companyData.address}</p>
-        <p>{companyData.description}</p>
-      </div>
-    </div>
+    </Fragment>
   );
 }
 

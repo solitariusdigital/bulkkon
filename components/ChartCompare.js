@@ -30,7 +30,6 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
       data: {
         x: "x",
         columns: [dateValues, priceValuesOne, priceValuesTwo],
-        type: "spline",
       },
       color: {
         pattern: ["#043d71", "#ff0d29"],
