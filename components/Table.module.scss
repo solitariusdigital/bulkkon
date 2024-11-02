@@ -10,6 +10,7 @@
   box-shadow: config.$card-shadow;
   background: config.$white;
   border: 1px solid config.$grey;
+  margin: auto;
 
   @include mixins.mobile {
     width: calc(100% - 24px);

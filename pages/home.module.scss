@@ -9,6 +9,10 @@
   max-width: config.$max-widthHeigh;
   margin: auto;
 
+  @include mixins.mobile {
+    width: 100%;
+  }
+
   .button {
     @include mixins.button(config.$brand, config.$brand, config.$white);
   }

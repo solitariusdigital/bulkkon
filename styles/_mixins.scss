@@ -58,7 +58,7 @@ $screen-fourK: 6000px;
 @mixin input() {
   padding: 12px;
   height: 50px;
-  background: config.$background;
+  background: config.$white;
   color: config.$black;
   outline: none;
   border: 1px solid config.$grey;
@@ -66,7 +66,7 @@ $screen-fourK: 6000px;
 
   &:focus {
     outline: none;
-    background: transparent;
+    background: config.$white;
     border: 1px solid config.$brand;
   }
 }
