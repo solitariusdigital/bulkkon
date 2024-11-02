@@ -11,7 +11,7 @@
   direction: rtl;
 
   @include mixins.mobile {
-    width: calc(100% - 12px);
+    width: calc(100% - 24px);
   }
 
   .row {

@@ -27,47 +27,59 @@ export default function Table({ companyData }) {
   };
 
   return (
-    <table className={classes.table}>
-      <thead>
-        <tr className={classes.header}>
-          <th style={{ color: "#ffffff" }}>شرکت</th>
-          {screenSize === "desktop" && <th>شرکت</th>}
-          <th>قیمت امروز</th>
-          <th>قیمت دیروز</th>
-          <th>تغییر</th>
-          {screenSize !== "mobile" && <th>مقدار تغییر</th>}
-          {screenSize !== "mobile" && (
-            <th className={classes.icon}>
-              <ExpandLessIcon sx={{ color: "#ffffff", fontSize: "24px" }} />
-            </th>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {companyData.map((company, index) => (
-          <Fragment key={index}>
-            <tr
-              style={{ background: index % 2 !== 0 ? "#ffffff" : "#e7ecf0" }}
-              className={classes.information}
-              onClick={() =>
-                setExpandedItem(expandedItem === index ? null : index)
-              }
+    <div className={classes.table}>
+      <div className={classes.header}>
+        <p style={{ color: "#ffffff" }}>شرکت</p>
+        {screenSize === "desktop" && <p>شرکت</p>}
+        <p>قیمت امروز</p>
+        <p>قیمت دیروز</p>
+        <p>تغییر</p>
+        {screenSize !== "mobile" && <p>مقدار تغییر</p>}
+        {screenSize !== "mobile" && (
+          <p className={classes.icon}>
+            <ExpandLessIcon sx={{ color: "#ffffff", fontSize: "24px" }} />
+          </p>
+        )}
+      </div>
+      {companyData.map((company, index) => (
+        <div key={index}>
+          <div
+            className={classes.information}
+            style={{ background: index % 2 !== 0 ? "#ffffff" : "#e7ecf0" }}
+            onClick={() =>
+              setExpandedItem(expandedItem === index ? null : index)
+            }
+          >
+            <div className={classes.image}>
+              <Image
+                src={company.media}
+                layout="fill"
+                objectFit="contain"
+                alt="logo"
+                as="image"
+              />
+            </div>
+            {screenSize === "desktop" && (
+              <p className={classes.name}>{company.name}</p>
+            )}
+            <p>{convertNumber(findPriceDates(company.price, false))}</p>
+            <p>{convertNumber(findPriceDates(company.price, true))}</p>
+            <p
+              style={{
+                color:
+                  calculatePriceChange(company.price).direction === "+"
+                    ? "#4eba5c"
+                    : !calculatePriceChange(company.price).direction
+                    ? "#e43137"
+                    : "#0a0a0a",
+                fontWeight: "500",
+              }}
             >
-              <td className={classes.image}>
-                <Image
-                  src={company.media}
-                  layout="fill"
-                  objectFit="contain"
-                  alt="logo"
-                  as="image"
-                />
-              </td>
-              {screenSize === "desktop" && (
-                <td className={classes.name}>{company.name}</td>
-              )}
-              <td>{convertNumber(findPriceDates(company.price, false))}</td>
-              <td>{convertNumber(findPriceDates(company.price, true))}</td>
-              <td
+              {calculatePriceChange(company.price).direction}
+              {calculatePriceChange(company.price).percentageChange}
+            </p>
+            {screenSize !== "mobile" && (
+              <p
                 style={{
                   color:
                     calculatePriceChange(company.price).direction === "+"
@@ -75,88 +87,67 @@ export default function Table({ companyData }) {
                       : !calculatePriceChange(company.price).direction
                       ? "#e43137"
                       : "#0a0a0a",
-                  fontWeight: "500",
                 }}
               >
                 {calculatePriceChange(company.price).direction}
-                {calculatePriceChange(company.price).percentageChange}
-              </td>
-              {screenSize !== "mobile" && (
-                <td
-                  style={{
-                    color:
-                      calculatePriceChange(company.price).direction === "+"
-                        ? "#4eba5c"
-                        : !calculatePriceChange(company.price).direction
-                        ? "#e43137"
-                        : "#0a0a0a",
-                  }}
-                >
-                  {calculatePriceChange(company.price).direction}
-                  {convertNumber(
-                    calculatePriceChange(company.price).changeAmount
-                  )}
-                </td>
-              )}
-              {screenSize !== "mobile" && (
-                <td className={classes.icon}>
-                  {expandedItem === index ? (
-                    <ExpandLessIcon
-                      sx={{ fontSize: "24px" }}
-                      className="icon"
-                      onClick={() => expandInformation(index)}
-                    />
-                  ) : (
-                    <ExpandMoreIcon
-                      sx={{ fontSize: "24px" }}
-                      className="icon"
-                      onClick={() => expandInformation(index)}
-                    />
-                  )}
-                </td>
-              )}
-            </tr>
-            {expandedItem === index && screenSize !== "desktop" && (
-              <tr className={classes.details}>
-                <td>شرکت: {company.name}</td>
-              </tr>
+                {convertNumber(
+                  calculatePriceChange(company.price).changeAmount
+                )}
+              </p>
             )}
-            {expandedItem === index && (
-              <tr className={classes.details} style={{ marginBottom: "40px" }}>
-                <td>نماینده: {company.manager}</td>
-                <td
-                  className={classes.phone}
-                  onClick={() =>
-                    window.open(
-                      `tel:+98${company.contact.substring(1)}`,
-                      "_self"
-                    )
-                  }
-                >
-                  {company.contact}
-                </td>
-                <td
-                  className={classes.about}
-                  onClick={() => Router.push(`/company/${company.name}`)}
-                >
-                  درباره
-                </td>
-              </tr>
-            )}
-            {expandedItem === index && (
-              <tr>
-                <td colSpan={screenSize !== "mobile" ? 6 : 4}>
-                  <Chart
-                    chartId={`chart-${fourGenerator()}`}
-                    companyData={company}
-                    legend={true}
+            {screenSize !== "mobile" && (
+              <div className={classes.icon}>
+                {expandedItem === index ? (
+                  <ExpandLessIcon
+                    sx={{ fontSize: "24px" }}
+                    className="icon"
+                    onClick={() => expandInformation(index)}
                   />
-                </td>
-              </tr>
+                ) : (
+                  <ExpandMoreIcon
+                    sx={{ fontSize: "24px" }}
+                    className="icon"
+                    onClick={() => expandInformation(index)}
+                  />
+                )}
+              </div>
             )}
-          </Fragment>
-        ))}
-      </tbody>
-    </table>
+          </div>
+          {expandedItem === index && screenSize !== "desktop" && (
+            <div className={classes.details}>
+              <p>شرکت: {company.name}</p>
+            </div>
+          )}
+          {expandedItem === index && (
+            <div className={classes.details} style={{ marginBottom: "40px" }}>
+              <p>نماینده: {company.manager}</p>
+              <p
+                className={classes.phone}
+                onClick={() =>
+                  window.open(`tel:+98${company.contact.substring(1)}`, "_self")
+                }
+              >
+                {company.contact}
+              </p>
+              <p
+                className={classes.about}
+                onClick={() => Router.push(`/company/${company.name}`)}
+              >
+                درباره
+              </p>
+            </div>
+          )}
+          {expandedItem === index && (
+            <div>
+              <Chart
+                chartId={`chart-${fourGenerator()}`}
+                companyData={company}
+                legend={true}
+              />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
