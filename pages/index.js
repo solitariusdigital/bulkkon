@@ -1,13 +1,22 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import classes from "./home.module.scss";
 import Router from "next/router";
 import Table from "@/components/Table";
-import dbConnect from "@/services/dbConnect";
-import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
 import logo from "@/assets/logo.png";
+import { getCompanyApi } from "@/services/api";
 
-export default function Home({ companyData }) {
+export default function Home() {
+  const [companyData, setCompanyData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const companyData = await getCompanyApi();
+      setCompanyData(companyData.filter((comp) => comp.active && comp.price));
+    };
+    fetchData();
+  }, [companyData]);
+
   return (
     <Fragment>
       <NextSeo
@@ -47,25 +56,4 @@ export default function Home({ companyData }) {
       </section>
     </Fragment>
   );
-}
-
-export async function getServerSideProps(context) {
-  try {
-    await dbConnect();
-    const companyData = await companyModel.find();
-    let activeCompanyData = companyData.filter(
-      (comp) => comp.active && comp.price
-    );
-
-    return {
-      props: {
-        companyData: JSON.parse(JSON.stringify(activeCompanyData)),
-      },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      notFound: true,
-    };
-  }
 }

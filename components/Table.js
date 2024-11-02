@@ -41,7 +41,7 @@ export default function Table({ companyData }) {
           </p>
         )}
       </div>
-      {companyData.map((company, index) => (
+      {companyData?.map((company, index) => (
         <div key={index}>
           <div
             className={classes.information}
