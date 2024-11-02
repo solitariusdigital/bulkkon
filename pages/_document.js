@@ -10,8 +10,7 @@ export default class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          <link rel="manifest" href="/public/manifest.json" />
-          <link rel="apple-touch-icon" href="/public/icon-192x192.png"></link>
+          <link rel="apple-touch-icon" href="/icon.png"></link>
           <meta name="theme-color" content="#fafbf6" />
         </Head>
         <body>
