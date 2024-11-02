@@ -9,10 +9,12 @@
   line-height: 30px;
 }
 
-body {
+html {
   background: config.$background;
+}
+
+body {
   user-select: none;
-  margin: auto;
 }
 
 a {
