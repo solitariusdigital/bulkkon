@@ -4,10 +4,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
   margin: auto;
-  font-family: config.$font !important;
 
   .button {
     @include mixins.button(config.$brand, config.$brand, config.$white);

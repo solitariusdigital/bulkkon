@@ -34,7 +34,7 @@ export default function Home({ companyData }) {
           maxVideoPreview: -1,
         }}
       />
-      <div className={classes.container}>
+      <section className={classes.container}>
         <button
           className={classes.button}
           onClick={() => Router.push("/compare")}
@@ -44,7 +44,7 @@ export default function Home({ companyData }) {
         <div className={classes.table}>
           <Table companyData={companyData} />
         </div>
-      </div>
+      </section>
     </Fragment>
   );
 }
