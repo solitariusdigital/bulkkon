@@ -1,22 +1,13 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import classes from "./home.module.scss";
 import Router from "next/router";
 import Table from "@/components/Table";
+import dbConnect from "@/services/dbConnect";
+import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
 import logo from "@/assets/logo.png";
-import { getCompanyApi } from "@/services/api";
 
-export default function Home() {
-  const [companyData, setCompanyData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const companyData = await getCompanyApi();
-      setCompanyData(companyData.filter((comp) => comp.active && comp.price));
-    };
-    fetchData();
-  }, [companyData]);
-
+export default function Home({ companyData }) {
   return (
     <Fragment>
       <NextSeo
@@ -43,7 +34,7 @@ export default function Home() {
           maxVideoPreview: -1,
         }}
       />
-      <section className={classes.container}>
+      <div className={classes.container}>
         <button
           className={classes.button}
           onClick={() => Router.push("/compare")}
@@ -53,7 +44,28 @@ export default function Home() {
         <div className={classes.table}>
           <Table companyData={companyData} />
         </div>
-      </section>
+      </div>
     </Fragment>
   );
+}
+
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const companyData = await companyModel.find();
+    let activeCompanyData = companyData.filter(
+      (comp) => comp.active && comp.price
+    );
+
+    return {
+      props: {
+        companyData: JSON.parse(JSON.stringify(activeCompanyData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }
