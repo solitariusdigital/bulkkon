@@ -1,12 +1,12 @@
 {
-  "theme_color": "#2d2b7f",
-  "background_color": "#2d2b7f",
+  "theme_color": "#fafbf6",
+  "background_color": "#fafbf6",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Outline Community",
-  "short_name": "Outline",
-  "description": "Beauty Clinic",
+  "name": "Kimpur",
+  "short_name": "Kimpur",
+  "description": "Kimpur",
   "icons": [
     {
       "src": "/icon-192x192.png",
