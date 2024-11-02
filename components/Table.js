@@ -1,4 +1,4 @@
-import { useContext, Fragment, useState } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Table.module.scss";
 import Image from "next/legacy/image";

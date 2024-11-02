@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   margin: auto;
+  font-family: config.$font !important;
 
   .button {
     @include mixins.button(config.$brand, config.$brand, config.$white);

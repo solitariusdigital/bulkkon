@@ -1,8 +1,6 @@
-import { useContext, Fragment, useState } from "react";
-import { StateContext } from "@/context/stateContext";
+import { Fragment } from "react";
 import classes from "./home.module.scss";
 import Router from "next/router";
-import Image from "next/legacy/image";
 import Table from "@/components/Table";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
