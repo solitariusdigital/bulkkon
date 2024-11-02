@@ -144,8 +144,8 @@ export default function Table({ companyData }) {
               </tr>
             )}
             {expandedItem === index && (
-              <tr className={classes.chart}>
-                <td>
+              <tr>
+                <td colSpan={screenSize !== "mobile" ? 6 : 4}>
                   <Chart
                     chartId={`chart-${fourGenerator()}`}
                     companyData={company}
