@@ -144,7 +144,7 @@ export default function Table({ companyData }) {
               </tr>
             )}
             {expandedItem === index && (
-              <tr>
+              <tr className={classes.chart}>
                 <td>
                   <Chart
                     chartId={`chart-${fourGenerator()}`}

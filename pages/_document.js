@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
             crossOrigin="true"
           />
           <link rel="apple-touch-icon" href="/public/icon-192x192.png"></link>
-          <meta name="theme-color" content="#fdb714" />
+          <meta name="theme-color" content="#e7ecf0" />
         </Head>
         <body>
           <Main />

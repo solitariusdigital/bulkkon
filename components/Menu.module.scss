@@ -19,6 +19,8 @@
   width: 150px;
 
   .nav {
+    font-weight: bold;
+
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;

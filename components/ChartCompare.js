@@ -68,7 +68,7 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
         show: legend,
       },
       padding: {
-        right: 20,
+        right: 40,
       },
       tooltip: {
         format: {

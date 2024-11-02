@@ -58,7 +58,7 @@ const Chart = ({ chartId, legend, companyData }) => {
         show: legend,
       },
       padding: {
-        right: 30,
+        right: 40,
       },
       tooltip: {
         format: {
