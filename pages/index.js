@@ -6,6 +6,7 @@ import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
 import logo from "@/assets/logo.png";
+import Image from "next/legacy/image";
 
 export default function Home({ companyData }) {
   return (
@@ -35,14 +36,18 @@ export default function Home({ companyData }) {
         }}
       />
       <div className={classes.container}>
-        <button
-          className={classes.button}
-          onClick={() => Router.push("/compare")}
-        >
-          ابزار مقایسه قیمت
-        </button>
         <div className={classes.table}>
           <Table companyData={companyData} />
+        </div>
+        <div className={classes.image}>
+          <Image
+            width={220}
+            height={150}
+            src={logo}
+            alt="logo"
+            as="image"
+            priority
+          />
         </div>
       </div>
     </Fragment>

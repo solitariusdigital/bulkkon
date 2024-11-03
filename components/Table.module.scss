@@ -25,8 +25,6 @@
       width: 150px;
       text-align: center;
       color: config.$greyText;
-      font-weight: 300;
-      font-size: small;
     }
 
     .icon {
@@ -81,7 +79,6 @@
     }
 
     .phone {
-      font-weight: bold;
       margin: 0px 20px;
 
       @include mixins.allDesktop {
@@ -93,8 +90,6 @@
     }
 
     p {
-      font-weight: 300;
-
       @include mixins.mobile {
         font-size: small;
       }

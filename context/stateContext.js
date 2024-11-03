@@ -14,6 +14,11 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
+      title: "ابزار مقایسه",
+      link: "/compare",
+      active: false,
+    },
+    {
       title: "پورتال",
       link: "/admin",
       active: false,

@@ -1,4 +1,4 @@
-import { useContext, Fragment, useState, useEffect } from "react";
+import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./compare.module.scss";
 import dynamic from "next/dynamic";
@@ -18,7 +18,6 @@ const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
 });
 
 export default function Compare({ companyData }) {
-  const { navigationBar, setNavigationBar } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [companyOne, setCompanyOne] = useState(null);
   const [companyTwo, setCompanyTwo] = useState(null);
@@ -27,14 +26,6 @@ export default function Compare({ companyData }) {
   const [companies, setCompanies] = useState(
     companyData.map((company) => company.name)
   );
-
-  useEffect(() => {
-    navigationBar.map((nav) => {
-      nav.active = false;
-    });
-    setNavigationBar([...navigationBar]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Fragment>

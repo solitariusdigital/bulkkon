@@ -1,7 +1,7 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.menu {
+.container {
   display: flex;
   justify-content: flex-end;
   margin: 20px auto;
@@ -10,28 +10,45 @@
   max-width: config.$max-widthHeigh;
 
   @include mixins.mobile {
-    width: calc(100% - 24px);
+    width: 100%;
   }
 }
 
-.navigation {
+.navigation,
+.footer {
   @include mixins.row-space-between-center();
-  width: 150px;
+  width: 25%;
+  margin: auto;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+  @include mixins.tablet {
+    width: 50%;
+  }
 
   .nav {
-    font-weight: bold;
+    background: config.$white;
+    color: config.$brand;
+    border: 1px solid config.$brand;
+    padding: 8px;
 
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
         color: config.$brand;
-        font-weight: bold;
       }
     }
   }
 
   .navActive {
-    color: config.$brand;
-    font-weight: bold;
+    background: config.$brand;
+    color: config.$white;
+    border: 1px solid config.$brand;
+    padding: 8px;
   }
+}
+
+.footer {
+  justify-content: center;
 }

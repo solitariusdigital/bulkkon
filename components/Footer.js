@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./Menu.module.scss";
 import Router from "next/router";
 
-export default function Menu() {
+export default function Footer() {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
 
   const activateNav = (link, index) => {
@@ -20,7 +20,7 @@ export default function Menu() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.navigation}>
+      <div className={classes.footer}>
         {navigationBar
           .map((nav, index) => (
             <Fragment key={index}>
@@ -32,7 +32,7 @@ export default function Menu() {
               </a>
             </Fragment>
           ))
-          .slice(0, 2)}
+          .slice(2, 3)}
       </div>
     </div>
   );

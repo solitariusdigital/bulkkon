@@ -8,7 +8,6 @@
   direction: rtl;
   max-width: config.$max-widthHeigh;
   width: 100%;
-  font-weight: 300;
 
   @include mixins.tablet {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
@@ -38,8 +37,6 @@
     }
 
     .phone {
-      font-weight: bold;
-
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;

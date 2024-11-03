@@ -52,8 +52,7 @@ p {
 
 .main {
   min-height: 100vh;
-  margin-top: 20px;
-  margin-bottom: 100px;
+  margin: 50px 0px;
 }
 
 .icon {
@@ -64,7 +63,6 @@ p {
   text-align: center;
   color: config.$red;
   margin: 16px 0px;
-  font-weight: 300;
 }
 
 .appload {

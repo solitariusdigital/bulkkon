@@ -13,13 +13,14 @@
     width: 100%;
   }
 
-  .button {
-    @include mixins.button(config.$brand, config.$brand, config.$white);
+  .table {
+    width: 100%;
   }
 
-  .table {
-    margin-top: 20px;
-    width: 100%;
+  .image {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
   }
 }
 

@@ -2,6 +2,7 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
+import Footer from "./Footer";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import secureLocalStorage from "react-secure-storage";
@@ -89,6 +90,7 @@ export default function RootLayout({ children }) {
           <div className="main">
             <main>{children}</main>
           </div>
+          <Footer />
         </Fragment>
       ) : (
         <div className="appload">

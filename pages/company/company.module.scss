@@ -26,8 +26,6 @@
     }
 
     .phone {
-      font-weight: bold;
-
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;
@@ -39,7 +37,6 @@
 
   .details {
     padding: 8px;
-    font-weight: 300;
 
     .address {
       color: config.$greyText;
