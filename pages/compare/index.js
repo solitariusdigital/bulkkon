@@ -30,21 +30,21 @@ export default function Compare({ companyData }) {
   return (
     <Fragment>
       <NextSeo
-        title="Kimpur"
-        description="Kimpur Price"
-        canonical="https://www.kimpur.com"
+        title="Bulkkon"
+        description="Bulkkon Price"
+        canonical="https://www.bulkkon.com"
         openGraph={{
           type: "website",
           locale: "fa_IR",
-          url: "https://www.kimpur.com",
-          title: "Kimpur",
-          description: "Kimpur Price",
-          siteName: "Kimpur",
+          url: "https://www.bulkkon.com",
+          title: "Bulkkon",
+          description: "Bulkkon Price",
+          siteName: "Bulkkon",
           images: {
             url: logo,
             width: 1200,
             height: 630,
-            alt: "Kimpur",
+            alt: "Bulkkon",
           },
         }}
         robotsProps={{

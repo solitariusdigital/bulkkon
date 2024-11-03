@@ -93,6 +93,7 @@
 }
 
 .priceInfo {
+  margin-bottom: 8px;
   @include mixins.row-space-between-center();
 }
 

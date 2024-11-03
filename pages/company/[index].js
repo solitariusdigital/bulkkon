@@ -22,18 +22,18 @@ export default function Company({ companyData }) {
       <NextSeo
         title={companyData.name}
         description={companyData.description}
-        canonical={`https://kimpur.com/company/${companyData.name}`}
+        canonical={`https://bulkkon.com/company/${companyData.name}`}
         openGraph={{
           type: "article",
           locale: "fa_IR",
-          url: `https://kimpur.com/company/${companyData.name}`,
+          url: `https://bulkkon.com/company/${companyData.name}`,
           title: `${companyData.name}`,
           description: `${companyData.description}`,
-          siteName: "kimpur",
+          siteName: "bulkkon",
           article: {
             publishedTime: companyData.createdAt,
             modifiedTime: companyData.updatedAt,
-            authors: ["https://www.kimpur.com"],
+            authors: ["https://www.bulkkon.com"],
           },
           images: {
             url: companyData.media,

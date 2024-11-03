@@ -24,6 +24,24 @@ export const StateProvider = (props) => {
       active: false,
     },
   ]);
+  const [products, setProducts] = useState([
+    {
+      name: "ایزو MDI",
+      type: "one",
+    },
+    {
+      name: "فوم‌ سخت Rigid",
+      type: "two",
+    },
+    {
+      name: "فوم‌ انعطاف‌پذیر Flexible",
+      type: "three",
+    },
+    {
+      name: "زیره کفش",
+      type: "four",
+    },
+  ]);
   const stateContext = {
     navigationBar,
     setNavigationBar,
@@ -33,6 +51,8 @@ export const StateProvider = (props) => {
     setScreenSize,
     permissionControl,
     setPermissionControl,
+    products,
+    setProducts,
   };
   return (
     <StateContext.Provider value={stateContext}>

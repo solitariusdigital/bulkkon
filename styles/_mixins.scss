@@ -45,6 +45,7 @@ $screen-fourK: 6000px;
   color: $subColor;
   box-shadow: config.$button-shadow;
   background: $color2;
+  font-size: 16px;
 
   @include desktop {
     &:hover {

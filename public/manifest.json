@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Kimpur",
-  "short_name": "Kimpur",
-  "description": "Kimpur",
+  "name": "Bulkkon",
+  "short_name": "Bulkkon",
+  "description": "Bulkkon",
   "icons": [
     {
       "src": "/icon-192x192.png",

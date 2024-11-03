@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { useContext, Fragment, useState } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
@@ -7,8 +8,10 @@ import { updateCompanyApi, getSingleCompanyApi } from "@/services/api";
 import { convertNumber } from "@/services/utility";
 
 export default function Price({ companyData }) {
+  const { products, setProducts } = useContext(StateContext);
   const [day, setDay] = useState(null);
   const [company, setCompany] = useState("");
+  const [productType, setProductType] = useState("");
   const [selectedCompany, setSelectedCompany] = useState({});
   const [price, setPrice] = useState(0);
   const [date, setDate] = useState("");
@@ -31,7 +34,9 @@ export default function Price({ companyData }) {
       ...getCompanyData,
       price: {
         ...getCompanyData.price,
-        [date]: Number(price),
+        [productType]: {
+          [date]: Number(price),
+        },
       },
     };
 
@@ -80,7 +85,26 @@ export default function Price({ companyData }) {
           })}
         </select>
       </div>
-      {company && (
+      <div className={classes.input}>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => {
+            setProductType(e.target.value);
+          }}
+        >
+          <option value="default" disabled>
+            انتخاب محصول
+          </option>
+          {products.map((product, index) => {
+            return (
+              <option key={index} value={product.type}>
+                {product.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      {company && productType && (
         <div className={classes.calendar}>
           <Calendar
             value={day}
@@ -115,6 +139,9 @@ export default function Price({ companyData }) {
           </div>
           <div className={classes.priceInfo}>
             <p>{company}</p>
+            <p>{products.filter((pro) => pro.type === productType)[0].name}</p>
+          </div>
+          <div className={classes.priceInfo}>
             <p>{convertNumber(Number(price))} ریال</p>
             <p>{date}</p>
           </div>

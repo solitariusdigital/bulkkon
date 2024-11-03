@@ -34,7 +34,7 @@ export default function Company({ companyData }) {
     companyData.map((company) => company.name)
   );
 
-  const sourceLink = "https://kimpur.storage.c2.liara.space";
+  const sourceLink = "https://bulkkon.storage.c2.liara.space";
   const router = useRouter();
 
   const createCompany = async () => {

@@ -11,21 +11,21 @@ export default function Home({ companyData }) {
   return (
     <Fragment>
       <NextSeo
-        title="Kimpur"
-        description="Kimpur Price"
-        canonical="https://www.kimpur.com"
+        title="Bulkkon"
+        description="Bulkkon Price"
+        canonical="https://www.bulkkon.com"
         openGraph={{
           type: "website",
           locale: "fa_IR",
-          url: "https://www.kimpur.com",
-          title: "Kimpur",
-          description: "Kimpur Price",
-          siteName: "Kimpur",
+          url: "https://www.bulkkon.com",
+          title: "Bulkkon",
+          description: "Bulkkon Price",
+          siteName: "Bulkkon",
           images: {
             url: logo,
             width: 1200,
             height: 630,
-            alt: "Kimpur",
+            alt: "Bulkkon",
           },
         }}
         robotsProps={{
@@ -40,7 +40,7 @@ export default function Home({ companyData }) {
         </div>
         <div className={classes.notes}>
           <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
-          <p>.واحد قیمت در جدول، ریال در هر کیلوگرم است</p>
+          <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
         </div>
         <div
           className={classes.image}
