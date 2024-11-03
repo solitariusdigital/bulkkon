@@ -96,7 +96,7 @@ export default function Price({ companyData }) {
             <div className={classes.bar}>
               <p className={classes.label}>
                 <span>*</span>
-                قیمت
+                قیمت ریال
               </p>
               <CloseIcon
                 className="icon"
@@ -115,7 +115,7 @@ export default function Price({ companyData }) {
           </div>
           <div className={classes.priceInfo}>
             <p>{company}</p>
-            <p>{convertNumber(Number(price))}</p>
+            <p>{convertNumber(Number(price))} ریال</p>
             <p>{date}</p>
           </div>
           <div className={classes.formAction}>

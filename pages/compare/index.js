@@ -127,7 +127,7 @@ export default function Compare({ companyData }) {
                   <div className={classes.header}>
                     <p>شرکت</p>
                     <p>قیمت امروز</p>
-                    <p>قیمت دیروز</p>
+                    <p>میانگین ۷ روز</p>
                     <p>تغییر</p>
                     {screenSize !== "mobile" && <p>مقدار تغییر</p>}
                   </div>
@@ -220,7 +220,7 @@ export default function Compare({ companyData }) {
                   <div className={classes.infoContainer}>
                     <div className={classes.header}>
                       <p>شرکت</p>
-                      <p>نماینده</p>
+                      <p>مدیر فروش</p>
                       <p>تماس</p>
                     </div>
                     <div className={classes.info}>
@@ -245,7 +245,7 @@ export default function Compare({ companyData }) {
                   <div className={classes.infoContainer}>
                     <div className={classes.header}>
                       <p>شرکت</p>
-                      <p>نماینده</p>
+                      <p>مدیر فروش</p>
                       <p>تماس</p>
                     </div>
                     <div className={classes.info}>

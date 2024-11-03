@@ -92,7 +92,7 @@ export default function CompanyList({ companyData }) {
             >
               {comp.contact}
             </p>
-            <h4>نماینده: {comp.manager}</h4>
+            <h4>مدیر فروش: {comp.manager}</h4>
           </div>
           <div className={classes.details}>
             <p className={classes.address}>آدرس: {comp.address}</p>

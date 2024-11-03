@@ -33,6 +33,12 @@
     }
   }
 
+  .header {
+    p {
+      font-size: small;
+    }
+  }
+
   .information {
     margin: 8px 0px;
     background: config.$background;

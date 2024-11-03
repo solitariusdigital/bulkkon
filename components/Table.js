@@ -32,7 +32,7 @@ export default function Table({ companyData }) {
         <p style={{ color: "#ffffff" }}>شرکت</p>
         {screenSize === "desktop" && <p>شرکت</p>}
         <p>قیمت امروز</p>
-        <p>قیمت دیروز</p>
+        <p>میانگین ۷ روز</p>
         <p>تغییر</p>
         {screenSize !== "mobile" && <p>مقدار تغییر</p>}
         {screenSize !== "mobile" && (
@@ -120,7 +120,7 @@ export default function Table({ companyData }) {
           )}
           {expandedItem === index && (
             <div className={classes.details} style={{ marginBottom: "40px" }}>
-              <p>نماینده: {company.manager}</p>
+              <p>مدیر فروش: {company.manager}</p>
               <p
                 className={classes.phone}
                 onClick={() =>

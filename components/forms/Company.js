@@ -192,7 +192,7 @@ export default function Company({ companyData }) {
         <div className={classes.bar}>
           <p className={classes.label}>
             <span>*</span>
-            مدیر
+            مدیر فروش
           </p>
           <CloseIcon
             className="icon"

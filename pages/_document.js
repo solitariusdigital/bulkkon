@@ -13,10 +13,6 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon.png"></link>
           <meta name="theme-color" content="#fafbf6" />
-          <meta
-            name="viewport"
-            content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
-          />
         </Head>
         <body>
           <Main />

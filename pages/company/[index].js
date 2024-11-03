@@ -70,7 +70,7 @@ export default function Company({ companyData }) {
           >
             {companyData.contact}
           </p>
-          <h4>نماینده: {companyData.manager}</h4>
+          <h4>مدیر فروش: {companyData.manager}</h4>
         </div>
         <div className={classes.details}>
           <p className={classes.address}>آدرس: {companyData.address}</p>

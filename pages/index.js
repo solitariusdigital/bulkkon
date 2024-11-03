@@ -38,6 +38,10 @@ export default function Home({ companyData }) {
         <div className={classes.table}>
           <Table companyData={companyData} />
         </div>
+        <div className={classes.notes}>
+          <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
+          <p>.واحد قیمت در جدول، ریال در هر کیلوگرم است</p>
+        </div>
         <div
           className={classes.image}
           onClick={() =>
