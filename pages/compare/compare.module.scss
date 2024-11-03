@@ -19,9 +19,13 @@
   }
 
   .inputContainer {
-    width: 350px;
+    width: 400px;
     margin: 20px 0px;
     @include mixins.row-space-between-center();
+
+    @include mixins.mobile {
+      width: 100%;
+    }
 
     select {
       @include mixins.input();
