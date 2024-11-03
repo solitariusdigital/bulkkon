@@ -8,7 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "kimpur.storage.c2.liara.space",
+        hostname: "bulkkon.storage.c2.liara.space",
         port: "",
         pathname: "/**",
       },

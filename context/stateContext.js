@@ -26,15 +26,15 @@ export const StateProvider = (props) => {
   ]);
   const [products, setProducts] = useState([
     {
-      name: "ایزو MDI",
+      name: "MDI - ایزو",
       type: "one",
     },
     {
-      name: "فوم‌ سخت Rigid",
+      name: "Rigid - فوم‌ سخت ",
       type: "two",
     },
     {
-      name: "فوم‌ انعطاف‌پذیر Flexible",
+      name: "Flexible - فوم‌ انعطاف‌پذیر",
       type: "three",
     },
     {
