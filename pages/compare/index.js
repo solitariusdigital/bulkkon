@@ -2,16 +2,16 @@ import { useContext, Fragment, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./compare.module.scss";
 import dynamic from "next/dynamic";
+import dbConnect from "@/services/dbConnect";
+import companyModel from "@/models/Company";
+import { NextSeo } from "next-seo";
+import logo from "@/assets/logo.png";
 import {
   fourGenerator,
   convertNumber,
   findPriceDates,
   calculatePriceChange,
 } from "@/services/utility";
-import dbConnect from "@/services/dbConnect";
-import companyModel from "@/models/Company";
-import { NextSeo } from "next-seo";
-import logo from "@/assets/logo.png";
 
 const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
   ssr: false,

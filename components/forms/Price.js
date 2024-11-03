@@ -1,7 +1,5 @@
-import { useContext, Fragment, useState } from "react";
-import { StateContext } from "@/context/stateContext";
+import { Fragment, useState } from "react";
 import classes from "./Form.module.scss";
-import Image from "next/legacy/image";
 import CloseIcon from "@mui/icons-material/Close";
 import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";

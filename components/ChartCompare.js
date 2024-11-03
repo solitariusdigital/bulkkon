@@ -15,14 +15,13 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
   ].sort();
   dateValues.unshift("x");
 
-  const priceValuesOne = dateValues.map(
-    (date) => companyOne.price[date] || null
-  );
-  const priceValuesTwo = dateValues.map(
-    (date) => companyTwo.price[date] || null
-  );
-  priceValuesOne.unshift(companyOne.name);
-  priceValuesTwo.unshift(companyTwo.name);
+  const priceValuesOne = [companyOne.name];
+  const priceValuesTwo = [companyTwo.name];
+
+  dateValues.slice(1).forEach((date) => {
+    priceValuesOne.push(companyOne.price[date] || null);
+    priceValuesTwo.push(companyTwo.price[date] || null);
+  });
 
   useEffect(() => {
     const chart = c3.generate({

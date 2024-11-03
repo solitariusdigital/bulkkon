@@ -42,20 +42,6 @@ export function convertFaToEn(date) {
     .replace(/\//g, "-");
 }
 
-export function sortPricesByDate(prices) {
-  const sortedKeys = Object.keys(prices).sort((a, b) => {
-    return (
-      new Date(a.replace(/-/g, "/")).getTime() -
-      new Date(b.replace(/-/g, "/")).getTime()
-    );
-  });
-  const sortedPrices = {};
-  sortedKeys.forEach((key) => {
-    sortedPrices[key] = prices[key];
-  });
-  return sortedPrices;
-}
-
 export function getCurrentDate(isYesterday = false) {
   const now = new Date();
   if (isYesterday) {

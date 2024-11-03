@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import classes from "./home.module.scss";
-import Router from "next/router";
 import Table from "@/components/Table";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
@@ -39,7 +38,16 @@ export default function Home({ companyData }) {
         <div className={classes.table}>
           <Table companyData={companyData} />
         </div>
-        <div className={classes.image}>
+        <div
+          className={classes.image}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            })
+          }
+        >
           <Image
             width={220}
             height={150}

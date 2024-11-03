@@ -3,7 +3,6 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./Chart.module.scss";
 import c3 from "c3";
 import "c3/c3.css";
-import { sortPricesByDate } from "@/services/utility";
 
 const Chart = ({ chartId, legend, companyData }) => {
   const { screenSize, setScreenSize } = useContext(StateContext);
@@ -11,7 +10,7 @@ const Chart = ({ chartId, legend, companyData }) => {
   let dateValues = Object.keys(companyData.price);
   dateValues.unshift("x");
 
-  let priceValues = Object.values(sortPricesByDate(companyData.price));
+  let priceValues = Object.values(companyData.price);
   priceValues.unshift(companyData.name);
 
   useEffect(() => {
