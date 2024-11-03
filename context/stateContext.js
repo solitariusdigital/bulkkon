@@ -6,7 +6,7 @@ export const StateProvider = (props) => {
   const [screenSize, setScreenSize] = useState(
     "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
   );
-  const [permissionControl, setPermissionControl] = useState("user" || "admin");
+  const [permissionControl, setPermissionControl] = useState("user" || "super");
   const [navigationBar, setNavigationBar] = useState([
     {
       title: "جدول قیمت",

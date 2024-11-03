@@ -15,10 +15,10 @@ export default function Portal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
-  const [formType, setFormType] = useState(true);
+  const [formType, setFormType] = useState(false);
 
   useEffect(() => {
-    if (permissionControl === "admin") {
+    if (permissionControl === "super") {
       Router.push("/admin");
     }
   }, [permissionControl]);
@@ -59,7 +59,7 @@ export default function Portal() {
       if (decryptPassword(userData.password) === password) {
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-        if (userData.permission === "admin") {
+        if (userData.permission === "super") {
           window.location.assign("/admin");
         } else {
           window.location.assign("/");

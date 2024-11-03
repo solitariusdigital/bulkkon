@@ -18,7 +18,7 @@ export default function Admin({ companyData }) {
   const navigation = ["فرم شرکت", "ثبت قیمت", "شرکت‌ها"];
 
   useEffect(() => {
-    if (permissionControl !== "admin") {
+    if (permissionControl !== "super") {
       Router.push("/portal");
     }
   }, [permissionControl]);
