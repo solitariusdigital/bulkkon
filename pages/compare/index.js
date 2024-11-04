@@ -19,9 +19,11 @@ const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
 
 export default function Compare({ companyData }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { products, setProducts } = useContext(StateContext);
   const [companyOne, setCompanyOne] = useState(null);
   const [companyTwo, setCompanyTwo] = useState(null);
   const [renderChart, setRenderChart] = useState(true);
+  const [productType, setProductType] = useState("");
 
   const [companies, setCompanies] = useState(
     companyData.map((company) => company.name)
@@ -103,7 +105,26 @@ export default function Compare({ companyData }) {
             </select>
           </div>
         </div>
-        {companyOne && companyTwo && (
+        <div className={classes.input} style={{ marginBottom: "20px" }}>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => {
+              setProductType(e.target.value);
+            }}
+          >
+            <option value="default" disabled>
+              انتخاب محصول
+            </option>
+            {products.map((product, index) => {
+              return (
+                <option key={index} value={product.type}>
+                  {product.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        {companyOne && companyTwo && productType && (
           <Fragment>
             <div className={classes.textContainer}>
               <div className={classes.text}>
@@ -120,8 +141,14 @@ export default function Compare({ companyData }) {
                     chartId={`chart-${fourGenerator()}`}
                     companyOne={companyOne}
                     companyTwo={companyTwo}
+                    productType={productType}
                     legend={true}
                   />
+                </div>
+                <div className={classes.notes}>
+                  <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
+                  <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
+                  <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
                 </div>
                 <div className={classes.infoContainer}>
                   <div className={classes.header}>
@@ -134,41 +161,58 @@ export default function Compare({ companyData }) {
                   <div className={classes.info}>
                     <p>{companyOne.name}</p>
                     <p>
-                      {convertNumber(findPriceDates(companyOne.price, false))}
+                      {convertNumber(
+                        findPriceDates(companyOne.price[productType], false)
+                      )}
                     </p>
                     <p>
-                      {convertNumber(findPriceDates(companyOne.price, true))}
+                      {convertNumber(
+                        findPriceDates(companyOne.price[productType], true)
+                      )}
                     </p>
                     <p
                       style={{
                         color:
-                          calculatePriceChange(companyOne.price).direction ===
-                          "+"
+                          calculatePriceChange(companyOne.price[productType])
+                            .direction === "+"
                             ? "#4eba5c"
-                            : !calculatePriceChange(companyOne.price).direction
+                            : !calculatePriceChange(
+                                companyOne.price[productType]
+                              ).direction
                             ? "#e43137"
                             : "#0a0a0a",
                       }}
                     >
-                      {calculatePriceChange(companyOne.price).direction}
-                      {calculatePriceChange(companyOne.price).percentageChange}
+                      {
+                        calculatePriceChange(companyOne.price[productType])
+                          .direction
+                      }
+                      {
+                        calculatePriceChange(companyOne.price[productType])
+                          .percentageChange
+                      }
                     </p>
                     {screenSize !== "mobile" && (
                       <p
                         style={{
                           color:
-                            calculatePriceChange(companyOne.price).direction ===
-                            "+"
+                            calculatePriceChange(companyOne.price[productType])
+                              .direction === "+"
                               ? "#4eba5c"
-                              : !calculatePriceChange(companyOne.price)
-                                  .direction
+                              : !calculatePriceChange(
+                                  companyOne.price[productType]
+                                ).direction
                               ? "#e43137"
                               : "#0a0a0a",
                         }}
                       >
-                        {calculatePriceChange(companyOne.price).direction}
+                        {
+                          calculatePriceChange(companyOne.price[productType])
+                            .direction
+                        }
                         {convertNumber(
-                          calculatePriceChange(companyOne.price).changeAmount
+                          calculatePriceChange(companyOne.price[productType])
+                            .changeAmount
                         )}
                       </p>
                     )}
@@ -176,41 +220,58 @@ export default function Compare({ companyData }) {
                   <div className={classes.info}>
                     <p>{companyTwo.name}</p>
                     <p>
-                      {convertNumber(findPriceDates(companyTwo.price, false))}
+                      {convertNumber(
+                        findPriceDates(companyTwo.price[productType], false)
+                      )}
                     </p>
                     <p>
-                      {convertNumber(findPriceDates(companyTwo.price, true))}
+                      {convertNumber(
+                        findPriceDates(companyTwo.price[productType], true)
+                      )}
                     </p>
                     <p
                       style={{
                         color:
-                          calculatePriceChange(companyTwo.price).direction ===
-                          "+"
+                          calculatePriceChange(companyTwo.price[productType])
+                            .direction === "+"
                             ? "#4eba5c"
-                            : !calculatePriceChange(companyTwo.price).direction
+                            : !calculatePriceChange(
+                                companyTwo.price[productType]
+                              ).direction
                             ? "#e43137"
                             : "#0a0a0a",
                       }}
                     >
-                      {calculatePriceChange(companyTwo.price).direction}
-                      {calculatePriceChange(companyTwo.price).percentageChange}
+                      {
+                        calculatePriceChange(companyTwo.price[productType])
+                          .direction
+                      }
+                      {
+                        calculatePriceChange(companyTwo.price[productType])
+                          .percentageChange
+                      }
                     </p>
                     {screenSize !== "mobile" && (
                       <p
                         style={{
                           color:
-                            calculatePriceChange(companyTwo.price).direction ===
-                            "+"
+                            calculatePriceChange(companyTwo.price[productType])
+                              .direction === "+"
                               ? "#4eba5c"
-                              : !calculatePriceChange(companyTwo.price)
-                                  .direction
+                              : !calculatePriceChange(
+                                  companyTwo.price[productType]
+                                ).direction
                               ? "#e43137"
                               : "#0a0a0a",
                         }}
                       >
-                        {calculatePriceChange(companyTwo.price).direction}
+                        {
+                          calculatePriceChange(companyTwo.price[productType])
+                            .direction
+                        }
                         {convertNumber(
-                          calculatePriceChange(companyTwo.price).changeAmount
+                          calculatePriceChange(companyTwo.price[productType])
+                            .changeAmount
                         )}
                       </p>
                     )}

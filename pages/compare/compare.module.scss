@@ -26,10 +26,26 @@
     @include mixins.mobile {
       width: 100%;
     }
+  }
 
-    select {
-      @include mixins.input();
-      width: 160px;
+  select {
+    @include mixins.input();
+    width: 160px;
+  }
+
+  .notes {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    margin-top: 20px;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    p {
+      color: config.$greyText;
+      font-size: small;
     }
   }
 

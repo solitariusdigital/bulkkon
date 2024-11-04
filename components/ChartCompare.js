@@ -4,13 +4,19 @@ import classes from "./Chart.module.scss";
 import c3 from "c3";
 import "c3/c3.css";
 
-const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
+const ChartCompare = ({
+  chartId,
+  legend,
+  companyOne,
+  companyTwo,
+  productType,
+}) => {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
   const dateValues = [
     ...new Set([
-      ...Object.keys(companyOne.price),
-      ...Object.keys(companyTwo.price),
+      ...Object.keys(companyOne.price?.[productType] || {}),
+      ...Object.keys(companyTwo.price?.[productType] || {}),
     ]),
   ].sort();
   dateValues.unshift("x");
@@ -19,8 +25,8 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
   const priceValuesTwo = [companyTwo.name];
 
   dateValues.slice(1).forEach((date) => {
-    priceValuesOne.push(companyOne.price[date] || null);
-    priceValuesTwo.push(companyTwo.price[date] || null);
+    priceValuesOne.push(companyOne.price?.[productType]?.[date] || null);
+    priceValuesTwo.push(companyTwo.price?.[productType]?.[date] || null);
   });
 
   useEffect(() => {
@@ -48,7 +54,7 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
         y: {
           tick: {
             format: function (value) {
-              return (value / 1000)
+              return (value / 10000)
                 .toFixed(0)
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Convert to thousands and format with commas
             },
@@ -72,7 +78,7 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
       tooltip: {
         format: {
           value: (value, ratio, id) => {
-            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return value / 10000;
           },
         },
       },
@@ -87,7 +93,7 @@ const ChartCompare = ({ chartId, legend, companyOne, companyTwo }) => {
       chart.destroy(); // Cleanup on unmount
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [productType]);
 
   const generateAxisCount = () => {
     let count = 0;
