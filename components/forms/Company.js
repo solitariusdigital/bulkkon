@@ -11,6 +11,8 @@ import {
   sixGenerator,
   uploadMedia,
   extractParagraphs,
+  toEnglishNumber,
+  isEnglishNumber,
 } from "@/services/utility";
 import { createCompanyApi, updateCompanyApi } from "@/services/api";
 
@@ -97,11 +99,15 @@ export default function Company({ companyData }) {
       mediaLink = editMedia;
     }
 
+    let phoneEnglish = isEnglishNumber(contact)
+      ? contact
+      : toEnglishNumber(contact);
+
     const companyObject = {
       ...editCompanyData,
       name: name.trim(),
       manager: manager.trim(),
-      contact: contact.trim(),
+      contact: phoneEnglish,
       address: address.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
@@ -228,6 +234,7 @@ export default function Company({ companyData }) {
           name="contact"
           onChange={(e) => setContact(e.target.value)}
           value={contact}
+          maxLength={11}
           dir="rtl"
           autoComplete="off"
         ></input>
@@ -314,7 +321,13 @@ export default function Company({ companyData }) {
         <p className={classes.alert}>{alert}</p>
         {loader && (
           <div>
-            <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+            <Image
+              width={50}
+              height={50}
+              src={loaderImage}
+              alt="loading"
+              unoptimized
+            />
           </div>
         )}
         <button

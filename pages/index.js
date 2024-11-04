@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+import { Fragment, useContext, useState } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./home.module.scss";
 import Table from "@/components/Table";
 import dbConnect from "@/services/dbConnect";
@@ -8,6 +9,21 @@ import logo from "@/assets/logo.png";
 import Image from "next/legacy/image";
 
 export default function Home({ companyData }) {
+  const { products, setProducts } = useContext(StateContext);
+  const [productType, setProductType] = useState("one");
+
+  const activateNav = (type, index) => {
+    setProductType(type);
+    products.map((product, i) => {
+      if (i === index) {
+        product.active = true;
+      } else {
+        product.active = false;
+      }
+    });
+    setProducts([...products]);
+  };
+
   return (
     <Fragment>
       <NextSeo
@@ -35,12 +51,30 @@ export default function Home({ companyData }) {
         }}
       />
       <div className={classes.container}>
+        <div className={classes.notes}>
+          <p>.با انتخاب محصولات زیر جدول قیمت محصول را مشاهده کنید</p>
+          <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
+          <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
+        </div>
+        <div className={classes.navigation}>
+          {products.map((product, index) => (
+            <Fragment key={index}>
+              <p
+                className={
+                  !product.active ? classes.product : classes.productActive
+                }
+                onClick={() => activateNav(product.type, index)}
+              >
+                {product.name}
+              </p>
+            </Fragment>
+          ))}
+        </div>
         <div className={classes.table}>
-          <Table companyData={companyData} />
+          <Table companyData={companyData} productType={productType} />
         </div>
         <div className={classes.notes}>
           <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
-          <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
         </div>
         <div
           className={classes.image}

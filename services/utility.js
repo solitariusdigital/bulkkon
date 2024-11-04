@@ -85,6 +85,18 @@ export function calculatePriceChange(priceObject) {
   }
 }
 
+export function toEnglishNumber(number) {
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return number
+    .split("")
+    .map((x) => farsiDigits.indexOf(x)) // Find the index of the Farsi digit
+    .join("");
+}
+
+export function isEnglishNumber(str) {
+  return Boolean(str.match(/^[A-Za-z0-9]*$/));
+}
+
 export function onlyLettersAndNumbers(str) {
   return Boolean(str.match(/^[A-Za-z0-9]*$/));
 }

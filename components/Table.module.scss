@@ -39,6 +39,18 @@
     }
   }
 
+  .note {
+    @include mixins.row-space-between-center();
+    justify-content: center;
+    margin: auto;
+    color: config.$greyText;
+
+    p {
+      font-size: small;
+      margin: 0px 2px;
+    }
+  }
+
   .information {
     margin: 8px 0px;
     background: config.$background;

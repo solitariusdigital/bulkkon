@@ -15,8 +15,10 @@ import {
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
 
-export default function Table({ companyData }) {
+export default function Table({ companyData, productType }) {
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { products, setProducts } = useContext(StateContext);
+
   const [expandedItem, setExpandedItem] = useState(null);
 
   const expandInformation = (index) => {
@@ -28,6 +30,10 @@ export default function Table({ companyData }) {
 
   return (
     <div className={classes.table}>
+      <div className={classes.note}>
+        <p>جدول قیمت</p>
+        <p>{products.filter((pro) => pro.type === productType)[0].name} </p>
+      </div>
       <div className={classes.header}>
         <p style={{ color: "#ffffff" }}>شرکت</p>
         {screenSize === "desktop" && <p>شرکت</p>}
@@ -62,36 +68,47 @@ export default function Table({ companyData }) {
             {screenSize === "desktop" && (
               <p className={classes.name}>{company.name}</p>
             )}
-            <p>{convertNumber(findPriceDates(company.price, false))}</p>
-            <p>{convertNumber(findPriceDates(company.price, true))}</p>
+            <p>
+              {convertNumber(findPriceDates(company.price[productType], false))}
+            </p>
+            <p>
+              {convertNumber(findPriceDates(company.price[productType], true))}
+            </p>
             <p
               style={{
                 color:
-                  calculatePriceChange(company.price).direction === "+"
+                  calculatePriceChange(company.price[productType]).direction ===
+                  "+"
                     ? "#4eba5c"
-                    : !calculatePriceChange(company.price).direction
+                    : !calculatePriceChange(company.price[productType])
+                        .direction
                     ? "#e43137"
                     : "#0a0a0a",
                 fontWeight: "500",
               }}
             >
-              {calculatePriceChange(company.price).direction}
-              {calculatePriceChange(company.price).percentageChange}
+              {calculatePriceChange(company.price[productType]).direction}
+              {
+                calculatePriceChange(company.price[productType])
+                  .percentageChange
+              }
             </p>
             {screenSize !== "mobile" && (
               <p
                 style={{
                   color:
-                    calculatePriceChange(company.price).direction === "+"
+                    calculatePriceChange(company.price[productType])
+                      .direction === "+"
                       ? "#4eba5c"
-                      : !calculatePriceChange(company.price).direction
+                      : !calculatePriceChange(company.price[productType])
+                          .direction
                       ? "#e43137"
                       : "#0a0a0a",
                 }}
               >
-                {calculatePriceChange(company.price).direction}
+                {calculatePriceChange(company.price[productType]).direction}
                 {convertNumber(
-                  calculatePriceChange(company.price).changeAmount
+                  calculatePriceChange(company.price[productType]).changeAmount
                 )}
               </p>
             )}
@@ -142,6 +159,7 @@ export default function Table({ companyData }) {
               <Chart
                 chartId={`chart-${fourGenerator()}`}
                 companyData={company}
+                productType={productType}
                 legend={true}
               />
             </div>

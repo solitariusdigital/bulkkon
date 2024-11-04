@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     text-align: right;
-    margin-top: 20px;
+    margin-bottom: 20px;
 
     @include mixins.mobile {
       width: calc(100% - 24px);
@@ -31,12 +31,48 @@
 
   .table {
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .image {
     display: flex;
     justify-content: center;
     margin-top: 50px;
+  }
+
+  .navigation {
+    @include mixins.row-space-between-center();
+    width: 400px;
+    margin: auto;
+    box-shadow: config.$card-shadow;
+    margin-bottom: 12px;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    .product,
+    .productActive {
+      font-size: small;
+      background: config.$white;
+      color: config.$greyText;
+      padding: 4px;
+      text-align: center;
+      border: 1px solid config.$brand;
+
+      @include mixins.allDesktop {
+        &:hover {
+          background: config.$brand;
+          color: config.$white;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .productActive {
+      background: config.$brand;
+      color: config.$white;
+    }
   }
 }
 

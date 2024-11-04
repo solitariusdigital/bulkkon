@@ -22,7 +22,7 @@ export default function Price({ companyData }) {
   const [alert, setAlert] = useState("");
 
   const handleSubmit = async () => {
-    if (!company || !price || !date) {
+    if (!company || !price || !date || !productType) {
       showAlert("همه موارد الزامیست");
       return;
     }
@@ -35,6 +35,7 @@ export default function Price({ companyData }) {
       price: {
         ...getCompanyData.price,
         [productType]: {
+          ...getCompanyData.price?.[productType],
           [date]: Number(price),
         },
       },
@@ -90,6 +91,7 @@ export default function Price({ companyData }) {
           defaultValue={"default"}
           onChange={(e) => {
             setProductType(e.target.value);
+            setDisableButton(false);
           }}
         >
           <option value="default" disabled>

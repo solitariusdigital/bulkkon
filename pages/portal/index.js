@@ -15,7 +15,7 @@ export default function Portal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
-  const [formType, setFormType] = useState(false);
+  const [formType, setFormType] = useState(true);
 
   useEffect(() => {
     if (permissionControl === "super") {

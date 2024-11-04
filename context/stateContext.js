@@ -28,18 +28,22 @@ export const StateProvider = (props) => {
     {
       name: "MDI - ایزو",
       type: "one",
+      active: true,
     },
     {
       name: "Rigid - فوم‌ سخت ",
       type: "two",
+      active: false,
     },
     {
       name: "Flexible - فوم‌ انعطاف‌پذیر",
       type: "three",
+      active: false,
     },
     {
       name: "زیره کفش",
       type: "four",
+      active: false,
     },
   ]);
   const stateContext = {

@@ -1,19 +1,25 @@
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Chart.module.scss";
 import c3 from "c3";
 import "c3/c3.css";
 
-const Chart = ({ chartId, legend, companyData }) => {
+const Chart = ({ chartId, legend, companyData, productType }) => {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
-  let dateValues = Object.keys(companyData.price);
-  dateValues.unshift("x");
+  const productTypeValue = companyData.price[productType];
+  let dateValues = [];
+  let priceValues = [];
 
-  let priceValues = Object.values(companyData.price);
-  priceValues.unshift(companyData.name);
+  if (productTypeValue) {
+    dateValues = Object.keys(productTypeValue);
+    dateValues.unshift("x");
+    priceValues = Object.values(productTypeValue);
+    priceValues.unshift(companyData.name);
+  }
 
   useEffect(() => {
+    if (!productTypeValue) return;
     const chart = c3.generate({
       bindto: `#${chartId}`,
       data: {
@@ -38,9 +44,9 @@ const Chart = ({ chartId, legend, companyData }) => {
         y: {
           tick: {
             format: function (value) {
-              return (value / 1000)
+              return (value / 10000)
                 .toFixed(0)
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Convert to thousands and format with commas
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             },
             count: generateAxisCount(),
           },
@@ -62,7 +68,7 @@ const Chart = ({ chartId, legend, companyData }) => {
       tooltip: {
         format: {
           value: (value, ratio, id) => {
-            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return value / 10000;
           },
         },
       },
@@ -72,12 +78,11 @@ const Chart = ({ chartId, legend, companyData }) => {
         },
       },
     });
-
     return () => {
       chart.destroy(); // Cleanup on unmount
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [productType]);
 
   const generateAxisCount = () => {
     let count = 0;
@@ -98,7 +103,15 @@ const Chart = ({ chartId, legend, companyData }) => {
     return count;
   };
 
-  return <div id={chartId} className={classes.chart}></div>;
+  return (
+    <Fragment>
+      {productTypeValue ? (
+        <div id={chartId} className={classes.chart}></div>
+      ) : (
+        <p className={classes.note}>.قیمت برای نمایش نمودار وجود ندارد</p>
+      )}
+    </Fragment>
+  );
 };
 
 export default Chart;
