@@ -11,6 +11,7 @@ import {
   convertNumber,
   findPriceDates,
   calculatePriceChange,
+  calculateSevenDaysAverage,
 } from "@/services/utility";
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
@@ -72,7 +73,11 @@ export default function Table({ companyData, productType }) {
               {convertNumber(findPriceDates(company.price[productType], false))}
             </p>
             <p>
-              {convertNumber(findPriceDates(company.price[productType], true))}
+              {company.price[productType]
+                ? convertNumber(
+                    calculateSevenDaysAverage(company.price[productType])
+                  )
+                : "-"}
             </p>
             <p
               style={{

@@ -45,7 +45,7 @@
     width: 400px;
     margin: auto;
     box-shadow: config.$card-shadow;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 
     @include mixins.mobile {
       width: calc(100% - 24px);

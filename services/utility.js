@@ -53,6 +53,20 @@ export function getCurrentDate(isYesterday = false) {
   return date;
 }
 
+export function sortPricesByDate(prices) {
+  const sortedKeys = Object.keys(prices).sort((a, b) => {
+    return (
+      new Date(a.replace(/-/g, "/")).getTime() -
+      new Date(b.replace(/-/g, "/")).getTime()
+    );
+  });
+  const sortedPrices = {};
+  sortedKeys.forEach((key) => {
+    sortedPrices[key] = prices[key];
+  });
+  return sortedPrices;
+}
+
 export function findPriceDates(price, isYesterday) {
   let todayDate = getCurrentDate(isYesterday);
   let value;
@@ -64,13 +78,30 @@ export function findPriceDates(price, isYesterday) {
   return value ? value : "-";
 }
 
+export function calculateSevenDaysAverage(priceObject) {
+  let todayDate = convertFaToEn(getCurrentDate());
+  let sorted = sortPricesByDate(priceObject);
+  let lastSeven;
+  if (priceObject.hasOwnProperty(todayDate)) {
+    lastSeven = Object.values(sorted).slice(-8, -1);
+  } else {
+    lastSeven = Object.values(sorted).slice(-7);
+  }
+  const total = lastSeven.reduce((sum, value) => sum + value, 0);
+  const average = total / lastSeven.length;
+  return average;
+}
+
 export function calculatePriceChange(priceObject) {
   let today = findPriceDates(priceObject, false);
-  let yesterday = findPriceDates(priceObject, true);
-  const changeAmount = today - yesterday;
-  const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2);
+  let sevenDaysAverage = "-";
+  if (priceObject) {
+    sevenDaysAverage = calculateSevenDaysAverage(priceObject);
+  }
+  const changeAmount = today - sevenDaysAverage;
+  const percentageChange = ((changeAmount / sevenDaysAverage) * 100).toFixed(2);
   const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : " ";
-  if (today !== "-" && yesterday !== "-") {
+  if (today !== "-" && sevenDaysAverage !== "-") {
     return {
       percentageChange: percentageChange + "%",
       changeAmount: changeAmount,
