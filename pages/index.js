@@ -52,7 +52,6 @@ export default function Home({ companyData }) {
       />
       <div className={classes.container}>
         <div className={classes.notes}>
-          <p>.با انتخاب محصولات زیر جدول قیمت محصول را مشاهده کنید</p>
           <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
           <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
         </div>

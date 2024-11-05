@@ -114,9 +114,21 @@
     }
   }
 
+  .imageContainer {
+    @include mixins.row-space-between-center();
+    overflow-x: auto;
+    width: 150px;
+  }
+
   .image {
     position: relative;
-    width: 150px;
+    width: 100px;
     height: 30px;
+  }
+
+  .name {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: small;
   }
 }

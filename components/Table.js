@@ -37,7 +37,7 @@ export default function Table({ companyData, productType }) {
       </div>
       <div className={classes.header}>
         <p style={{ color: "#ffffff" }}>شرکت</p>
-        {screenSize === "desktop" && <p>شرکت</p>}
+        {screenSize !== "mobile" && <p>شرکت</p>}
         <p>قیمت امروز</p>
         <p>میانگین ۷ روز</p>
         <p>تغییر</p>
@@ -57,16 +57,21 @@ export default function Table({ companyData, productType }) {
               setExpandedItem(expandedItem === index ? null : index)
             }
           >
-            <div className={classes.image}>
-              <Image
-                src={company.media}
-                layout="fill"
-                objectFit="contain"
-                alt="logo"
-                as="image"
-              />
+            <div className={classes.imageContainer}>
+              <div className={classes.image}>
+                <Image
+                  src={company.media}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="logo"
+                  as="image"
+                />
+              </div>
+              {screenSize === "mobile" && (
+                <p className={classes.name}>{company.name}</p>
+              )}
             </div>
-            {screenSize === "desktop" && (
+            {screenSize !== "mobile" && (
               <p className={classes.name}>{company.name}</p>
             )}
             <p>
@@ -135,7 +140,7 @@ export default function Table({ companyData, productType }) {
               </div>
             )}
           </div>
-          {expandedItem === index && screenSize !== "desktop" && (
+          {expandedItem === index && screenSize === "mobile" && (
             <div className={classes.details}>
               <p>شرکت: {company.name}</p>
             </div>

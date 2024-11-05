@@ -11,6 +11,7 @@ import {
   convertNumber,
   findPriceDates,
   calculatePriceChange,
+  calculateSevenDaysAverage,
 } from "@/services/utility";
 
 const ChartCompare = dynamic(() => import("@/components/ChartCompare"), {
@@ -166,9 +167,13 @@ export default function Compare({ companyData }) {
                       )}
                     </p>
                     <p>
-                      {convertNumber(
-                        findPriceDates(companyOne.price[productType], true)
-                      )}
+                      {companyOne.price[productType]
+                        ? convertNumber(
+                            calculateSevenDaysAverage(
+                              companyOne.price[productType]
+                            )
+                          )
+                        : "-"}
                     </p>
                     <p
                       style={{
@@ -225,9 +230,13 @@ export default function Compare({ companyData }) {
                       )}
                     </p>
                     <p>
-                      {convertNumber(
-                        findPriceDates(companyTwo.price[productType], true)
-                      )}
+                      {companyTwo.price[productType]
+                        ? convertNumber(
+                            calculateSevenDaysAverage(
+                              companyTwo.price[productType]
+                            )
+                          )
+                        : "-"}
                     </p>
                     <p
                       style={{
