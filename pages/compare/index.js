@@ -147,9 +147,9 @@ export default function Compare({ companyData }) {
                   />
                 </div>
                 <div className={classes.notes}>
-                  <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
                   <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
                   <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
+                  <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
                 </div>
                 <div className={classes.infoContainer}>
                   <div className={classes.header}>

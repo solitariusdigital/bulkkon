@@ -33,7 +33,8 @@
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
-        color: config.$brand;
+        color: config.$white;
+        background: config.$brand;
       }
     }
   }
