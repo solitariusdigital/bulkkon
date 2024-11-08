@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./admin.module.scss";
 import Company from "@/components/forms/Company";
@@ -11,6 +11,7 @@ import companyModel from "@/models/Company";
 export default function Admin({ companyData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const [displayAdmin, setDisplayAdmin] = useState(false);
   const [pageType, setPageType] = useState(
     "فرم شرکت" || "ثبت قیمت" || "شرکت‌ها"
   );
@@ -20,27 +21,33 @@ export default function Admin({ companyData }) {
   useEffect(() => {
     if (permissionControl !== "super") {
       Router.push("/portal");
+    } else {
+      setDisplayAdmin(true);
     }
   }, [permissionControl]);
 
   return (
-    <div className={classes.container}>
-      <h3>{currentUser?.name}</h3>
-      <div className={classes.navigation}>
-        {navigation.map((nav, index) => (
-          <p
-            key={index}
-            className={pageType === nav ? classes.navActive : classes.nav}
-            onClick={() => setPageType(nav)}
-          >
-            {nav}
-          </p>
-        ))}
-      </div>
-      {pageType === "فرم شرکت" && <Company companyData={companyData} />}
-      {pageType === "ثبت قیمت" && <Price companyData={companyData} />}
-      {pageType === "شرکت‌ها" && <CompanyList companyData={companyData} />}
-    </div>
+    <Fragment>
+      {displayAdmin && (
+        <div className={classes.container}>
+          <h3>{currentUser?.name}</h3>
+          <div className={classes.navigation}>
+            {navigation.map((nav, index) => (
+              <p
+                key={index}
+                className={pageType === nav ? classes.navActive : classes.nav}
+                onClick={() => setPageType(nav)}
+              >
+                {nav}
+              </p>
+            ))}
+          </div>
+          {pageType === "فرم شرکت" && <Company companyData={companyData} />}
+          {pageType === "ثبت قیمت" && <Price companyData={companyData} />}
+          {pageType === "شرکت‌ها" && <CompanyList companyData={companyData} />}
+        </div>
+      )}
+    </Fragment>
   );
 }
 
