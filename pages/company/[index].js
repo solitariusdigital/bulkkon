@@ -64,19 +64,14 @@ export default function Company({ companyData }) {
           <h3>{companyData.name}</h3>
         </div>
         <div className={classes.row}>
-          <div className={classes.row}>
+          <div
+            className={classes.row}
+            onClick={() =>
+              window.open(`tel:+98${companyData.contact.substring(1)}`, "_self")
+            }
+          >
             <PhoneIcon />
-            <p
-              className={classes.phone}
-              onClick={() =>
-                window.open(
-                  `tel:+98${companyData.contact.substring(1)}`,
-                  "_self"
-                )
-              }
-            >
-              {companyData.contact}
-            </p>
+            <p className={classes.phone}>{companyData.contact}</p>
           </div>
           <h4>مدیر فروش: {companyData.manager}</h4>
         </div>

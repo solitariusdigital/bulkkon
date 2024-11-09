@@ -106,12 +106,6 @@
         }
       }
     }
-
-    p {
-      @include mixins.mobile {
-        font-size: small;
-      }
-    }
   }
 
   .imageContainer {

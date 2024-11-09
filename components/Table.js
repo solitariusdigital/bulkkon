@@ -160,16 +160,14 @@ export default function Table({ companyData, productType }) {
             </div>
           )}
           {expandedItem === index && (
-            <div className={classes.details}>
+            <div
+              className={classes.details}
+              onClick={() =>
+                window.open(`tel:+98${company.contact.substring(1)}`, "_self")
+              }
+            >
               <PhoneIcon />
-              <p
-                className={classes.phone}
-                onClick={() =>
-                  window.open(`tel:+98${company.contact.substring(1)}`, "_self")
-                }
-              >
-                {company.contact}
-              </p>
+              <p className={classes.phone}>{company.contact}</p>
             </div>
           )}
           {expandedItem === index && (

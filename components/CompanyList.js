@@ -3,6 +3,7 @@ import classes from "./CompanyList.module.scss";
 import Image from "next/legacy/image";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import PhoneIcon from "@mui/icons-material/Phone";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
@@ -72,8 +73,9 @@ export default function CompanyList({ companyData }) {
             )}
           </div>
           <div className={classes.row}>
-            <div className={classes.logo}>
+            <div className={classes.image}>
               <Image
+                className={classes.logo}
                 src={comp.media}
                 layout="fill"
                 objectFit="contain"
@@ -84,14 +86,18 @@ export default function CompanyList({ companyData }) {
             <h3>{comp.name}</h3>
           </div>
           <div className={classes.row}>
-            <p
-              className={classes.phone}
+            <div
+              className={classes.row}
               onClick={() =>
-                window.open(`tel:+98${comp.contact.substring(1)}`, "_self")
+                window.open(
+                  `tel:+98${companyData.contact.substring(1)}`,
+                  "_self"
+                )
               }
             >
-              {comp.contact}
-            </p>
+              <PhoneIcon />
+              <p className={classes.phone}>{comp.contact}</p>
+            </div>
             <h4>مدیر فروش: {comp.manager}</h4>
           </div>
           <div className={classes.details}>
