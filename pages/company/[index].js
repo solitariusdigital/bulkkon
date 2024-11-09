@@ -5,6 +5,7 @@ import Image from "next/legacy/image";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 export default function Company({ companyData }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
@@ -54,7 +55,7 @@ export default function Company({ companyData }) {
             <Image
               src={companyData.media}
               layout="fill"
-              objectFit="contain"
+              objectFit="cover"
               alt="logo"
               as="image"
             />
@@ -62,14 +63,20 @@ export default function Company({ companyData }) {
           <h3>{companyData.name}</h3>
         </div>
         <div className={classes.row}>
-          <p
-            className={classes.phone}
-            onClick={() =>
-              window.open(`tel:+98${companyData.contact.substring(1)}`, "_self")
-            }
-          >
-            {companyData.contact}
-          </p>
+          <div className={classes.row}>
+            <PhoneIcon />
+            <p
+              className={classes.phone}
+              onClick={() =>
+                window.open(
+                  `tel:+98${companyData.contact.substring(1)}`,
+                  "_self"
+                )
+              }
+            >
+              {companyData.contact}
+            </p>
+          </div>
           <h4>مدیر فروش: {companyData.manager}</h4>
         </div>
         <div className={classes.details}>

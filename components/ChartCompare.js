@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Chart.module.scss";
 import c3 from "c3";
@@ -13,10 +13,13 @@ const ChartCompare = ({
 }) => {
   const { screenSize, setScreenSize } = useContext(StateContext);
 
+  const productTypeValueOne = companyOne.price[productType];
+  const productTypeValueTwo = companyTwo.price[productType];
+
   const dateValues = [
     ...new Set([
-      ...Object.keys(companyOne.price?.[productType] || {}),
-      ...Object.keys(companyTwo.price?.[productType] || {}),
+      ...Object.keys(productTypeValueOne || {}),
+      ...Object.keys(productTypeValueTwo || {}),
     ]),
   ].sort();
   dateValues.unshift("x");
@@ -25,11 +28,12 @@ const ChartCompare = ({
   const priceValuesTwo = [companyTwo.name];
 
   dateValues.slice(1).forEach((date) => {
-    priceValuesOne.push(companyOne.price?.[productType]?.[date] || null);
-    priceValuesTwo.push(companyTwo.price?.[productType]?.[date] || null);
+    priceValuesOne.push(productTypeValueOne[date] || null);
+    priceValuesTwo.push(productTypeValueTwo[date] || null);
   });
 
   useEffect(() => {
+    if (!productTypeValueOne && !productTypeValueTwo) return;
     const chart = c3.generate({
       bindto: `#${chartId}`,
       data: {
@@ -114,7 +118,15 @@ const ChartCompare = ({
     return count;
   };
 
-  return <div id={chartId} className={classes.chart}></div>;
+  return (
+    <Fragment>
+      {productTypeValueOne && productTypeValueTwo ? (
+        <div id={chartId} className={classes.chart}></div>
+      ) : (
+        <p className={classes.note}>.قیمت برای نمایش نمودار وجود ندارد</p>
+      )}
+    </Fragment>
+  );
 };
 
 export default ChartCompare;

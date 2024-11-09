@@ -6,6 +6,7 @@ import Router from "next/router";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import dynamic from "next/dynamic";
+import PhoneIcon from "@mui/icons-material/Phone";
 import {
   fourGenerator,
   convertNumber,
@@ -146,8 +147,20 @@ export default function Table({ companyData, productType }) {
             </div>
           )}
           {expandedItem === index && (
-            <div className={classes.details} style={{ marginBottom: "40px" }}>
+            <div className={classes.details}>
               <p>مدیر فروش: {company.manager}</p>
+
+              <p
+                className={classes.about}
+                onClick={() => Router.push(`/company/${company.name}`)}
+              >
+                درباره
+              </p>
+            </div>
+          )}
+          {expandedItem === index && (
+            <div className={classes.details}>
+              <PhoneIcon />
               <p
                 className={classes.phone}
                 onClick={() =>
@@ -155,12 +168,6 @@ export default function Table({ companyData, productType }) {
                 }
               >
                 {company.contact}
-              </p>
-              <p
-                className={classes.about}
-                onClick={() => Router.push(`/company/${company.name}`)}
-              >
-                درباره
               </p>
             </div>
           )}

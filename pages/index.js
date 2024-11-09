@@ -51,10 +51,6 @@ export default function Home({ companyData }) {
         }}
       />
       <div className={classes.container}>
-        <div className={classes.notes}>
-          <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
-          <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
-        </div>
         <div className={classes.navigation}>
           {products.map((product, index) => (
             <Fragment key={index}>
@@ -73,6 +69,8 @@ export default function Home({ companyData }) {
           <Table companyData={companyData} productType={productType} />
         </div>
         <div className={classes.notes}>
+          <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
+          <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
           <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
         </div>
         <div

@@ -26,6 +26,7 @@
     }
 
     .phone {
+      margin-left: 10px;
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;

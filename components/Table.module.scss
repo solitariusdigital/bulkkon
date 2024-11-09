@@ -97,7 +97,7 @@
     }
 
     .phone {
-      margin: 0px 20px;
+      margin-right: 10px;
 
       @include mixins.allDesktop {
         &:hover {
@@ -122,13 +122,12 @@
 
   .image {
     position: relative;
-    width: 100px;
+    width: 70px;
     height: 30px;
   }
 
   .name {
-    overflow: hidden;
-    white-space: nowrap;
     font-size: small;
+    line-height: 20px;
   }
 }
