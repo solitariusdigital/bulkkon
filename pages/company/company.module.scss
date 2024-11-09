@@ -19,14 +19,20 @@
     background: config.$greyBackground;
     @include mixins.row-space-between-center();
 
-    .logo {
+    .image {
       position: relative;
-      width: 20%;
-      height: 70px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: config.$white;
+
+      .logo {
+        border-radius: 50%;
+      }
     }
 
     .phone {
-      margin-left: 10px;
+      margin-left: 5px;
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;

@@ -51,11 +51,12 @@ export default function Company({ companyData }) {
       />
       <div className={classes.card}>
         <div className={classes.row}>
-          <div className={classes.logo}>
+          <div className={classes.image}>
             <Image
+              className={classes.logo}
               src={companyData.media}
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               alt="logo"
               as="image"
             />

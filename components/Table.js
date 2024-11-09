@@ -61,6 +61,7 @@ export default function Table({ companyData, productType }) {
             <div className={classes.imageContainer}>
               <div className={classes.image}>
                 <Image
+                  className={classes.logo}
                   src={company.media}
                   layout="fill"
                   objectFit="contain"

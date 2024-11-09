@@ -97,7 +97,7 @@
     }
 
     .phone {
-      margin-right: 10px;
+      margin-right: 5px;
 
       @include mixins.allDesktop {
         &:hover {
@@ -116,14 +116,27 @@
 
   .imageContainer {
     @include mixins.row-space-between-center();
+    justify-content: center;
     overflow-x: auto;
     width: 150px;
   }
 
   .image {
     position: relative;
-    width: 70px;
-    height: 30px;
+    min-width: 45px;
+    height: 45px;
+    background: config.$white;
+    border-radius: 50px;
+
+    @include mixins.mobile {
+      min-width: 35px;
+      height: 35px;
+      right: 5px;
+    }
+
+    .logo {
+      border-radius: 50px;
+    }
   }
 
   .name {

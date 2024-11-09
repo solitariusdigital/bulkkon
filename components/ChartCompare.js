@@ -60,7 +60,7 @@ const ChartCompare = ({
             format: function (value) {
               return (value / 10000)
                 .toFixed(0)
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Convert to thousands and format with commas
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             },
             count: generateAxisCount(),
           },
