@@ -154,7 +154,7 @@ export default function Compare({ companyData }) {
                 <div className={classes.infoContainer}>
                   <div className={classes.header}>
                     <p>شرکت</p>
-                    <p>قیمت امروز</p>
+                    <p>قیمت روز</p>
                     <p>میانگین ۷ روز</p>
                     <p>تغییر</p>
                     {screenSize !== "mobile" && <p>مقدار تغییر</p>}

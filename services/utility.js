@@ -69,10 +69,21 @@ export function sortPricesByDate(prices) {
 
 export function findPriceDates(price, isYesterday) {
   let todayDate = getCurrentDate(isYesterday);
-  let value;
+  let value = null;
   for (const key in price) {
     if (key === convertFaToEn(todayDate)) {
       value = price[key];
+      break;
+    }
+  }
+  // If no value was found, set value to the last item in the price object
+  if (price && !value) {
+    const keys = Object.keys(price);
+    if (keys.length > 0) {
+      const lastKey = keys[keys.length - 1]; // Get the last key
+      value = price[lastKey];
+    } else {
+      value = "-";
     }
   }
   return value ? value : "-";

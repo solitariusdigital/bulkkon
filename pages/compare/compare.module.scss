@@ -69,13 +69,17 @@
   .infoBox {
     width: 100%;
     @include mixins.row-space-between-center();
-    align-items: flex-start;
+    align-items: center;
 
     @include mixins.mobile {
       display: flex;
       flex-direction: column;
     }
     @include mixins.tablet {
+      display: flex;
+      flex-direction: column;
+    }
+    @include mixins.tabletPortrait {
       display: flex;
       flex-direction: column;
     }
@@ -87,6 +91,9 @@
         width: 100%;
       }
       @include mixins.tablet {
+        width: 80%;
+      }
+      @include mixins.tabletPortrait {
         width: 100%;
       }
 
@@ -113,6 +120,9 @@
       width: 100%;
     }
     @include mixins.tablet {
+      width: 80%;
+    }
+    @include mixins.tabletPortrait {
       width: 100%;
     }
 
