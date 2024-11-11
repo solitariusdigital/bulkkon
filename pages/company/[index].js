@@ -70,7 +70,7 @@ export default function Company({ companyData }) {
               window.open(`tel:+98${companyData.contact.substring(1)}`, "_self")
             }
           >
-            <PhoneIcon />
+            <PhoneIcon sx={{ fontSize: 20 }} />
             <p className={classes.phone}>{companyData.contact}</p>
           </div>
           <h4>مدیر فروش: {companyData.manager}</h4>

@@ -60,6 +60,9 @@
 
     p {
       color: config.$black;
+      @include mixins.mobile {
+        font-size: small;
+      }
     }
 
     @include mixins.allDesktop {
@@ -77,6 +80,12 @@
     justify-content: flex-start;
     padding: 0px 12px;
     margin: 12px 0px;
+
+    p {
+      @include mixins.mobile {
+        font-size: small;
+      }
+    }
 
     .about {
       position: absolute;
@@ -97,6 +106,8 @@
     }
 
     .phone {
+      position: relative;
+      top: 2px;
       margin-right: 5px;
 
       @include mixins.allDesktop {
@@ -134,7 +145,10 @@
   }
 
   .name {
-    font-size: small;
     line-height: 20px;
+
+    @include mixins.mobile {
+      font-size: small;
+    }
   }
 }

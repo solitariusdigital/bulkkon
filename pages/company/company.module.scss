@@ -13,7 +13,12 @@
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
-
+  @include mixins.tablet {
+    width: 400px;
+  }
+  @include mixins.tabletPortrait {
+    width: 400px;
+  }
   .row {
     padding: 8px;
     background: config.$greyBackground;
@@ -21,8 +26,8 @@
 
     .image {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: config.$white;
 

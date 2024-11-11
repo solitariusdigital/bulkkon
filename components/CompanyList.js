@@ -95,7 +95,7 @@ export default function CompanyList({ companyData }) {
                 )
               }
             >
-              <PhoneIcon />
+              <PhoneIcon sx={{ fontSize: 20 }} />
               <p className={classes.phone}>{comp.contact}</p>
             </div>
             <h4>مدیر فروش: {comp.manager}</h4>
