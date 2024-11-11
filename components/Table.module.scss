@@ -148,7 +148,7 @@
     line-height: 20px;
 
     @include mixins.mobile {
-      font-size: small;
+      margin-right: 5px;
     }
   }
 }
