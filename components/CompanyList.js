@@ -4,6 +4,7 @@ import Image from "next/legacy/image";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import PhoneIcon from "@mui/icons-material/Phone";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
@@ -100,6 +101,17 @@ export default function CompanyList({ companyData }) {
             </div>
             <h4>مدیر فروش: {comp.manager}</h4>
           </div>
+          {comp.site && (
+            <div
+              className={classes.row}
+              onClick={() => window.open(comp.site, "_ self")}
+            >
+              <div className={classes.row}>
+                <OpenInNewIcon sx={{ fontSize: 20 }} />
+                <p className={classes.link}>{comp.site}</p>
+              </div>
+            </div>
+          )}
           <div className={classes.details}>
             <p className={classes.address}>آدرس: {comp.address}</p>
             <p>{comp.description}</p>

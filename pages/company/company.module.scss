@@ -19,8 +19,9 @@
   @include mixins.tabletPortrait {
     width: 400px;
   }
+
   .row {
-    padding: 8px;
+    padding: 4px 8px;
     background: config.$greyBackground;
     @include mixins.row-space-between-center();
 
@@ -33,6 +34,18 @@
 
       .logo {
         border-radius: 50%;
+      }
+    }
+
+    .link {
+      direction: ltr;
+      margin-left: 5px;
+
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
       }
     }
 

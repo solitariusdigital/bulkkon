@@ -5,6 +5,7 @@ const CompanySchema = new Schema(
     name: String,
     manager: String,
     contact: String,
+    site: String,
     address: String,
     description: String,
     media: String,

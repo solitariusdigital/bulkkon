@@ -6,6 +6,7 @@ import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
 import PhoneIcon from "@mui/icons-material/Phone";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 export default function Company({ companyData }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
@@ -75,6 +76,17 @@ export default function Company({ companyData }) {
           </div>
           <h4>مدیر فروش: {companyData.manager}</h4>
         </div>
+        {companyData.site && (
+          <div
+            className={classes.row}
+            onClick={() => window.open(companyData.site, "_ self")}
+          >
+            <div className={classes.row}>
+              <OpenInNewIcon sx={{ fontSize: 20 }} />
+              <p className={classes.link}>{companyData.site}</p>
+            </div>
+          </div>
+        )}
         <div className={classes.details}>
           <p className={classes.address}>آدرس: {companyData.address}</p>
           <p>{companyData.description}</p>

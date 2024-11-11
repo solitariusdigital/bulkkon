@@ -16,6 +16,9 @@
     display: flex;
     flex-direction: column;
   }
+  @include mixins.tabletPortrait {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
 }
 
 .card {
@@ -23,10 +26,11 @@
   box-shadow: config.$card-shadow;
   background: config.$white;
   border: 1px solid config.$grey;
+  height: fit-content;
 
   .row,
   .control {
-    padding: 8px;
+    padding: 4px 8px;
     background: config.$greyBackground;
     @include mixins.row-space-between-center();
 
@@ -39,6 +43,18 @@
 
       .logo {
         border-radius: 50%;
+      }
+    }
+
+    .link {
+      direction: ltr;
+      margin-left: 5px;
+
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
       }
     }
 

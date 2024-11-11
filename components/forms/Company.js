@@ -21,6 +21,7 @@ export default function Company({ companyData }) {
   const [name, setName] = useState("");
   const [manager, setManager] = useState("");
   const [contact, setContact] = useState("");
+  const [site, setSite] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [newMedia, setNewMedia] = useState("");
@@ -67,6 +68,7 @@ export default function Company({ companyData }) {
       name: name.trim(),
       manager: manager.trim(),
       contact: contact.trim(),
+      site: site.trim(),
       address: address.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
@@ -108,6 +110,7 @@ export default function Company({ companyData }) {
       name: name.trim(),
       manager: manager.trim(),
       contact: phoneEnglish,
+      site: site,
       address: address.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
@@ -124,6 +127,7 @@ export default function Company({ companyData }) {
     setName(companyData[index].name);
     setManager(companyData[index].manager);
     setContact(companyData[index].contact);
+    setSite(companyData[index].site ? companyData[index].site : "");
     setAddress(companyData[index].address);
     setDescription(companyData[index].description);
     setEditMedia(companyData[index].media);
@@ -236,6 +240,24 @@ export default function Company({ companyData }) {
           value={contact}
           maxLength={11}
           dir="rtl"
+          autoComplete="off"
+        ></input>
+      </div>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <p className={classes.label}>سایت اختیاری</p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setSite("")}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          type="text"
+          id="site"
+          name="site"
+          onChange={(e) => setSite(e.target.value)}
+          value={site}
           autoComplete="off"
         ></input>
       </div>
