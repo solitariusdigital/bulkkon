@@ -90,10 +90,7 @@ export default function CompanyList({ companyData }) {
             <div
               className={classes.row}
               onClick={() =>
-                window.open(
-                  `tel:+98${companyData.contact.substring(1)}`,
-                  "_self"
-                )
+                window.open(`tel:+98${comp.contact.substring(1)}`, "_self")
               }
             >
               <PhoneIcon sx={{ fontSize: 20 }} />
