@@ -7,6 +7,7 @@ import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
 import PhoneIcon from "@mui/icons-material/Phone";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 
 export default function Company({ companyData }) {
   const { navigationBar, setNavigationBar } = useContext(StateContext);
@@ -22,14 +23,18 @@ export default function Company({ companyData }) {
   return (
     <Fragment>
       <NextSeo
-        title={companyData.name}
+        title={replaceSpacesAndHyphens(companyData.name)}
         description={companyData.description}
-        canonical={`https://bulkkon.com/company/${companyData.name}`}
+        canonical={`https://bulkkon.com/company/${replaceSpacesAndHyphens(
+          companyData.name
+        )}`}
         openGraph={{
           type: "article",
           locale: "fa_IR",
-          url: `https://bulkkon.com/company/${companyData.name}`,
-          title: `${companyData.name}`,
+          url: `https://bulkkon.com/company/${replaceSpacesAndHyphens(
+            companyData.name
+          )}`,
+          title: `${replaceSpacesAndHyphens(companyData.name)}`,
           description: `${companyData.description}`,
           siteName: "bulkkon",
           article: {
@@ -41,7 +46,7 @@ export default function Company({ companyData }) {
             url: companyData.media,
             width: 1200,
             height: 630,
-            alt: companyData.name,
+            alt: replaceSpacesAndHyphens(companyData.name),
           },
         }}
         robotsProps={{
@@ -100,7 +105,7 @@ export default function Company({ companyData }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    let name = context.query.index;
+    let name = replaceSpacesAndHyphens(context.query.index);
     const companyData = await companyModel.findOne({ name });
 
     return {

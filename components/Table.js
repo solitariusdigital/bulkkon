@@ -13,6 +13,7 @@ import {
   findPriceDates,
   calculatePriceChange,
   calculateSevenDaysAverage,
+  replaceSpacesAndHyphens,
 } from "@/services/utility";
 
 const Chart = dynamic(() => import("@/components/Chart"), { ssr: false });
@@ -153,7 +154,11 @@ export default function Table({ companyData, productType }) {
 
               <p
                 className={classes.about}
-                onClick={() => Router.push(`/company/${company.name}`)}
+                onClick={() =>
+                  Router.push(
+                    `/company/${replaceSpacesAndHyphens(company.name)}`
+                  )
+                }
               >
                 درباره
               </p>
