@@ -22,6 +22,7 @@ export default function Company({ companyData }) {
   const [manager, setManager] = useState("");
   const [contact, setContact] = useState("");
   const [site, setSite] = useState("");
+  const [order, setOrder] = useState(0);
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [newMedia, setNewMedia] = useState("");
@@ -69,6 +70,7 @@ export default function Company({ companyData }) {
       manager: manager.trim(),
       contact: contact.trim(),
       site: site.trim(),
+      order: order,
       address: address.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
@@ -111,6 +113,7 @@ export default function Company({ companyData }) {
       manager: manager.trim(),
       contact: phoneEnglish,
       site: site,
+      order: order,
       address: address.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
@@ -128,6 +131,7 @@ export default function Company({ companyData }) {
     setManager(companyData[index].manager);
     setContact(companyData[index].contact);
     setSite(companyData[index].site ? companyData[index].site : "");
+    setOrder(companyData[index].order ? companyData[index].order : 0);
     setAddress(companyData[index].address);
     setDescription(companyData[index].description);
     setEditMedia(companyData[index].media);
@@ -240,6 +244,24 @@ export default function Company({ companyData }) {
           value={contact}
           maxLength={11}
           dir="rtl"
+          autoComplete="off"
+        ></input>
+      </div>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <p className={classes.label}>ترتیب اختیاری</p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setOrder(0)}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          type="number"
+          id="order"
+          name="order"
+          onChange={(e) => setOrder(e.target.value)}
+          value={order}
           autoComplete="off"
         ></input>
       </div>

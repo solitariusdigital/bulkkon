@@ -9,6 +9,7 @@ const CompanySchema = new Schema(
     address: String,
     description: String,
     media: String,
+    order: Number,
     price: {},
     active: Boolean,
   },

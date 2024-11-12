@@ -104,7 +104,11 @@ export async function getServerSideProps(context) {
     let activeCompanyData = companyData.filter(
       (comp) => comp.active && comp.price
     );
-
+    activeCompanyData.sort((a, b) => {
+      if (a.order === 0) return 1;
+      if (b.order === 0) return -1;
+      return a.order - b.order;
+    });
     return {
       props: {
         companyData: JSON.parse(JSON.stringify(activeCompanyData)),
