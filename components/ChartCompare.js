@@ -27,10 +27,12 @@ const ChartCompare = ({
   const priceValuesOne = [companyOne.name];
   const priceValuesTwo = [companyTwo.name];
 
-  dateValues.slice(1).forEach((date) => {
-    priceValuesOne.push(productTypeValueOne[date] || null);
-    priceValuesTwo.push(productTypeValueTwo[date] || null);
-  });
+  if (productTypeValueOne && productTypeValueTwo) {
+    dateValues.slice(1).forEach((date) => {
+      priceValuesOne.push(productTypeValueOne[date] || null);
+      priceValuesTwo.push(productTypeValueTwo[date] || null);
+    });
+  }
 
   useEffect(() => {
     if (!productTypeValueOne && !productTypeValueTwo) return;
