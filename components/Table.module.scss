@@ -1,7 +1,8 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.table {
+.table,
+.currencyTable {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -150,5 +151,17 @@
     @include mixins.mobile {
       margin-right: 5px;
     }
+  }
+}
+
+.currencyTable {
+  width: 50%;
+
+  .information {
+    margin: 0px;
+  }
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
   }
 }

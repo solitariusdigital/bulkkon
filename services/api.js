@@ -95,3 +95,13 @@ export const deleteCompanyApi = async (id) => {
   });
   return await response.json();
 };
+
+export const getCurrencyApi = async () => {
+  const response = await fetch(`/api/currency`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

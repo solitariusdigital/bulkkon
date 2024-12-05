@@ -2,6 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./home.module.scss";
 import Table from "@/components/Table";
+import CurrencyTable from "@/components/CurrencyTable";
 import dbConnect from "@/services/dbConnect";
 import companyModel from "@/models/Company";
 import { NextSeo } from "next-seo";
@@ -51,6 +52,10 @@ export default function Home({ companyData }) {
         }}
       />
       <div className={classes.container}>
+        <div className={classes.table}>
+          <CurrencyTable />
+        </div>
+        <div className={classes.notes}></div>
         <div className={classes.navigation}>
           {products.map((product, index) => (
             <Fragment key={index}>
@@ -71,6 +76,9 @@ export default function Home({ companyData }) {
         <div className={classes.notes}>
           <p>.واحد قیمت در جدول، ریال / کیلوگرم است</p>
           <p>.واحد قیمت در نمودار، تومان / کیلوگرم است</p>
+          <p>.قیمت درج شده تنها برای اطلاع رسانی میباشد</p>
+          <p>.این سامانه مسئولیتی در قبال قیمت ندارد</p>
+          <p>.قیمت دقیق باید از طریق تماس با مدیر فروش شرکت دریافت شود</p>
           <p>.مالیات بر ارزش افزوده در جدول قیمت محاسبه نشده است</p>
         </div>
         <div
