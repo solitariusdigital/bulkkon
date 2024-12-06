@@ -54,23 +54,15 @@
 
   .information {
     margin: 8px 0px;
-    background: config.$background;
     border: 1px solid config.$grey;
     border-left: none;
     border-right: none;
+    cursor: pointer;
 
     p {
       color: config.$black;
       @include mixins.mobile {
         font-size: small;
-      }
-    }
-
-    @include mixins.allDesktop {
-      &:hover {
-        cursor: pointer;
-        background: config.$background;
-        color: config.$brand;
       }
     }
   }
@@ -157,11 +149,21 @@
 .currencyTable {
   width: 50%;
 
-  .information {
-    margin: 0px;
+  @include mixins.tablet {
+    min-width: 400px;
   }
-
+  @include mixins.tabletPortrait {
+    min-width: 400px;
+  }
   @include mixins.mobile {
     width: calc(100% - 24px);
+  }
+  .information {
+    margin: 0px;
+    background: config.$greyBackground;
+  }
+
+  .note {
+    font-size: small;
   }
 }

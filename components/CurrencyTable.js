@@ -1,11 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Table.module.scss";
-import { convertNumber } from "@/services/utility";
+import { convertNumber, getCurrentDate } from "@/services/utility";
 import { getCurrencyApi } from "@/services/api";
 
 export default function Table({ companyData, productType }) {
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const [currencyData, setCurrencyData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState("");
@@ -46,7 +45,8 @@ export default function Table({ companyData, productType }) {
           <p>{convertNumber(currencyData.gold[6].price)}</p>
         </div>
       )}
-      {alert && <p className="alert">{alert}</p>}
+      <p className={classes.note}>{getCurrentDate()}</p>
+      {alert && <p className={classes.note}>{alert}</p>}
     </div>
   );
 }
