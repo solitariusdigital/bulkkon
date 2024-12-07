@@ -41,8 +41,8 @@ export default function Table({ companyData, productType }) {
           <p>{convertNumber(currencyData.currency[0].price)}</p>
           <p>{convertNumber(currencyData.currency[1].price)}</p>
           <p>{convertNumber(currencyData.currency[2].price)}</p>
-          <p>${convertNumber(currencyData.gold[5].price)}</p>
           <p>{convertNumber(currencyData.gold[6].price)}</p>
+          <p>${convertNumber(currencyData.gold[5].price)}</p>
         </div>
       )}
       <p className={classes.note}>{getCurrentDate()}</p>
