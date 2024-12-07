@@ -1,12 +1,13 @@
-import { useContext, useState, useEffect } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useState, useEffect } from "react";
 import classes from "./Table.module.scss";
 import { convertNumber, getCurrentDate } from "@/services/utility";
 import { getCurrencyApi } from "@/services/api";
+import loaderImage from "@/assets/loader.png";
+import Image from "next/legacy/image";
 
-export default function Table({ companyData, productType }) {
+export default function Table() {
   const [currencyData, setCurrencyData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function Table({ companyData, productType }) {
       } catch (error) {
         showAlert("خطا در برقراری ارتباط");
       } finally {
-        setLoading(false);
+        setLoader(true);
       }
     };
     fetchPrices();
@@ -36,13 +37,24 @@ export default function Table({ companyData, productType }) {
         <p>طلا ۱۸</p>
         <p>انس طلا</p>
       </div>
-      {!loading && (
+      {loader && (
         <div className={classes.information}>
           <p>{convertNumber(currencyData.currency[0].price)}</p>
           <p>{convertNumber(currencyData.currency[1].price)}</p>
           <p>{convertNumber(currencyData.currency[2].price)}</p>
           <p>{convertNumber(currencyData.gold[6].price)}</p>
           <p>${convertNumber(currencyData.gold[5].price)}</p>
+        </div>
+      )}
+      {!loader && (
+        <div className={classes.note}>
+          <Image
+            width={50}
+            height={50}
+            src={loaderImage}
+            alt="loader"
+            unoptimized
+          />
         </div>
       )}
       <p className={classes.note}>{getCurrentDate()}</p>
