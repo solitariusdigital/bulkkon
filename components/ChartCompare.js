@@ -43,6 +43,7 @@ const ChartCompare = ({
           : previousPriceTwo;
       priceValuesOne.push(currentPriceOne);
       priceValuesTwo.push(currentPriceTwo);
+      // Update previous prices for the next iteration
       previousPriceOne = currentPriceOne;
       previousPriceTwo = currentPriceTwo;
     });
