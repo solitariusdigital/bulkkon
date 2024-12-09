@@ -3,6 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./Chart.module.scss";
 import c3 from "c3";
 import "c3/c3.css";
+import { convertPersianToGregorian } from "@/services/utility";
 
 const ChartCompare = ({
   chartId,
@@ -21,16 +22,29 @@ const ChartCompare = ({
       ...Object.keys(productTypeValueOne || {}),
       ...Object.keys(productTypeValueTwo || {}),
     ]),
-  ].sort();
+  ].sort((a, b) => convertPersianToGregorian(a) - convertPersianToGregorian(b));
   dateValues.unshift("x");
 
   const priceValuesOne = [companyOne.name];
   const priceValuesTwo = [companyTwo.name];
 
+  let previousPriceOne = null;
+  let previousPriceTwo = null;
+  // Populate price values, using the previous price as a placeholder if the current date's price is not available
   if (productTypeValueOne && productTypeValueTwo) {
     dateValues.slice(1).forEach((date) => {
-      priceValuesOne.push(productTypeValueOne[date] || null);
-      priceValuesTwo.push(productTypeValueTwo[date] || null);
+      const currentPriceOne =
+        productTypeValueOne[date] !== undefined
+          ? productTypeValueOne[date]
+          : previousPriceOne;
+      const currentPriceTwo =
+        productTypeValueTwo[date] !== undefined
+          ? productTypeValueTwo[date]
+          : previousPriceTwo;
+      priceValuesOne.push(currentPriceOne);
+      priceValuesTwo.push(currentPriceTwo);
+      previousPriceOne = currentPriceOne;
+      previousPriceTwo = currentPriceTwo;
     });
   }
 

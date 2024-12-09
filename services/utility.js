@@ -42,6 +42,12 @@ export function convertFaToEn(date) {
     .replace(/\//g, "-");
 }
 
+export function convertPersianToGregorian(persianDate) {
+  const [year, month, day] = persianDate.split("-").map(Number);
+  const gregorianDate = new Date(year + 621, month - 1, day); // Rough conversion
+  return gregorianDate;
+}
+
 export function getCurrentDate(isYesterday = false) {
   const now = new Date();
   if (isYesterday) {
