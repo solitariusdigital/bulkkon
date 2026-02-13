@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "aws-sdk": "^2.1692.0",
-    "eslint": "9.15.0",
+    "eslint": "10.0.0",
     "eslint-config-next": "15.0.3",
     "c3": "^0.7.20",
     "crypto-js": "^4.2.0",
